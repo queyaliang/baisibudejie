@@ -1,0 +1,109 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" >
+
+    <RadioGroup
+        android:id="@+id/rg_bottom_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="#eeeeee"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/rbtn_picture"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_background"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_picture"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:text="图片"
+            android:textColor="@drawable/selector_btn_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbtn_funny"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_background"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_funny"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:text="段子"
+           android:textColor="@drawable/selector_btn_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbtn_voice"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_background"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_voice"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:text="声音"
+            android:textColor="@drawable/selector_btn_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbtn_radio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_background"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_radio"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:text="视频"
+            android:textColor="@drawable/selector_btn_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbtn_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_background"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_search"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:text="搜索"
+           android:textColor="@drawable/selector_btn_text"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/rbtn_mine"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_background"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_mine"
+            android:gravity="center"
+            android:paddingTop="4dp"
+            android:text="我的"
+           android:textColor="@drawable/selector_btn_text"
+            android:textSize="12sp" />
+    </RadioGroup>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/rg_bottom_buttons"
+        android:layout_alignParentLeft="true" >
+    </android.support.v4.view.ViewPager>
+
+</RelativeLayout>
