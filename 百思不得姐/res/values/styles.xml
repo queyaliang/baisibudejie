@@ -5,6 +5,7 @@
     
     <color name="selected_btn_text">#d6203b</color>
     <color name="unselected_btn_text">#8a8a8a</color>
+    <color name="radio_color">#000000</color>
 
     <!--
         Base application theme, dependent on API level. This theme is replaced

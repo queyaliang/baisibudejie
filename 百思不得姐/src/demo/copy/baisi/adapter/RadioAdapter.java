@@ -20,6 +20,7 @@ import android.sax.StartElementListener;
 import android.text.GetChars;
 import android.util.Log;
 import android.view.View;
+import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -83,8 +84,10 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		holder.tvText.setText(radio.getText());
 		holder.tvZan.setText(radio.getLove()+"");
 		holder.tvRuo.setText(radio.getHate()+"");
-		
-		RotateAnimation anim = new RotateAnimation(0, 360, holder.image.getWidth()/2, holder.image.getHeight()/2);
+		holder.image.measure(34,34);
+		int width = holder.image.getMeasuredWidth();
+		int height = holder.image.getMeasuredHeight();
+		RotateAnimation anim = new RotateAnimation(0, 360,17, 17);
 		anim.setDuration(10000);
 		//ÔÈËÙÐý×ª
 		anim.setInterpolator(new LinearInterpolator());
@@ -95,7 +98,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		ImageListener listener = ImageLoader.getImageListener(holder.image, R.drawable.a010, R.drawable.a010);
 		imageLoader.get(radio.getProfile_image(), listener,holder.image.getWidth(),holder.image.getHeight());
 		
-		
+		holder.ivRadio.setImageResource(R.color.radio_color);
 		holder.ivRadio.setTag("ivRadio"+position);
 		
 		String url = radio.getVideo_uri();
@@ -117,7 +120,6 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		return convertView;
 	}
 	
-	
 	class ViewHolder{
 		CircleImageView image;
 		TextView 		tvName;
@@ -127,8 +129,8 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		ImageButton 	ibtnPlay;
 		TextView 		tvZan;
 		TextView		tvRuo;
-		
 	}
+	
 	class PlayRadioListener implements OnClickListener{
 		private String url;
 		
