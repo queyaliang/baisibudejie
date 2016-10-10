@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp" >
+
+        <demo.copy.baisi.ui.CircleImageView
+            android:id="@+id/ivCMPic"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ivCMPic"
+            android:text="用户名"
+            android:textColor="#111111"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ivCMPic"
+            android:layout_below="@+id/name"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/ivCMPic"
+            android:gravity="center"
+            android:text="2016-09-25 13:56:01"
+            android:textColor="#777777"
+            android:textSize="10sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="2dp" >
+
+        <TextView
+            android:id="@+id/funny_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:text="asasassasasasasa"
+            android:textColor="#223333"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/funny_text"
+            android:layout_marginBottom="8dp"
+            android:text="asasassasasasasa"
+            android:textColor="#223333"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp" >
+
+        <ImageView
+            android:id="@+id/iblove"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:background="@null"
+            android:src="@drawable/zan" />
+
+        <TextView
+            android:id="@+id/love"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/iblove"
+            android:gravity="center"
+            android:text="2123"
+            android:textColor="#777777"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/ibhate"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="1dp"
+            android:layout_toRightOf="@+id/love"
+            android:background="@null"
+            android:src="@drawable/ruo" />
+
+        <TextView
+            android:id="@+id/hate"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_toRightOf="@+id/ibhate"
+            android:gravity="center"
+            android:text="2123"
+            android:textColor="#777777"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/ibshare"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="35dp"
+            android:layout_toRightOf="@+id/hate"
+            android:background="@null"
+            android:src="@drawable/fenxiang" />
+    </RelativeLayout>
+
+</LinearLayout>
