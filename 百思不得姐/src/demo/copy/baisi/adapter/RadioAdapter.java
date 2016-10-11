@@ -85,15 +85,15 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		holder.tvZan.setText(radio.getLove()+"");
 		holder.tvRuo.setText(radio.getHate()+"");
 		holder.image.measure(34,34);
-		int width = holder.image.getMeasuredWidth();
-		int height = holder.image.getMeasuredHeight();
-		RotateAnimation anim = new RotateAnimation(0, 360,17, 17);
-		anim.setDuration(10000);
-		//匀速旋转
-		anim.setInterpolator(new LinearInterpolator());
-		//无限重复
-		anim.setRepeatCount(Animation.INFINITE);
-		holder.image.startAnimation(anim);
+//		int width = holder.image.getMeasuredWidth();
+//		int height = holder.image.getMeasuredHeight();
+//		RotateAnimation anim = new RotateAnimation(0, 360,26, 26);
+//		anim.setDuration(10000);
+//		//匀速旋转
+//		anim.setInterpolator(new LinearInterpolator());
+//		//无限重复
+//		anim.setRepeatCount(Animation.INFINITE);
+//		holder.image.startAnimation(anim);
 		
 		ImageListener listener = ImageLoader.getImageListener(holder.image, R.drawable.a010, R.drawable.a010);
 		imageLoader.get(radio.getProfile_image(), listener,holder.image.getWidth(),holder.image.getHeight());

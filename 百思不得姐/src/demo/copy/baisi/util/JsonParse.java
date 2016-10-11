@@ -16,6 +16,7 @@ import demo.copy.baisi.entity.Voice;
 
 public class JsonParse {
 	
+	
 	public static List<Radio> loadRadio(JSONArray array) throws JSONException{
 		List<Radio> radios = new ArrayList<Radio>();
 		for (int i = 0; i < array.length(); i++) {
@@ -57,6 +58,7 @@ public class JsonParse {
 			radios.add(radio);
 		}
 		return radios;
+		
 	}
 
 	public static List<Object> loadSearch(JSONArray array) {
@@ -69,8 +71,24 @@ public class JsonParse {
 		return objects;
 	}
 	
-	
-	
+	public static List<Funny> parseFunnyList(JSONArray array)throws JSONException{
+		List<Funny> funnys=new ArrayList<Funny>();
+		for(int i=0; i<array.length(); i++){
+			JSONObject object=array.getJSONObject(i);
+			Funny funny=new Funny();
+			funny.setText(object.getString("text"));
+			funny.setHate(object.getInt("hate"));
+			funny.setWeixin_url(object.getString("weixin_url"));
+			funny.setType(object.getInt("type"));
+			funny.setId(object.getInt("id"));
+			funny.setLove(object.getInt("love"));
+			funny.setName(object.getString("name"));
+			funny.setCreate_time(object.getString("create_time"));
+			funny.setProfile_image(object.getString("profile_image"));
+			funnys.add(funny);
+		}
+		return funnys;
+	}
 	
 	
 	
