@@ -68,7 +68,7 @@ private Handler mHandler;
 	}
 	@Override
 	public void updateFunnyList(List<Funny> funnys) {
-		// TODO Auto-generated method stub
+		Log.i("aaaa", ""+funnys.toString());
 		this.funnies=funnys;
 		funnyAdapter=new FunnyListAdapter(getActivity(), this.funnies);
 		listView.setAdapter(funnyAdapter);

@@ -2,11 +2,19 @@ package demo.copy.baisi.adapter;
 
 import java.util.List;
 
+import android.R.color;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.sax.StartElementListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
@@ -15,6 +23,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.activity.WebViewActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.ui.CircleImageView;
@@ -75,11 +84,29 @@ public class FunnyListAdapter extends BaseAdapter{
 		String text=funny.getText();
 		String content = text.replace("\n", "");
 		holder.text.setText(content);
-		holder.url.setText(" "+funny.getWeixin_url());
+		String url =funny.getWeixin_url();
+		holder.url.setText(url);
+		holder.url.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
+		holder.url.setTextColor(Color.BLUE);
 		Log.i("YYYYY", ""+funny.getProfile_image());
 //		x.image().bind(holder.cvuser,funny.getProfile_image());
+		holder.image.measure(34, 34);
+		int width = holder.image.getMeasuredWidth();
+		int height = holder.image.getMeasuredHeight();
+		RotateAnimation anim = new RotateAnimation(0, 360, 26, 26);
+		anim.setDuration(10000);
+		//匀速旋转
+		anim.setInterpolator(new LinearInterpolator());
+		//无限重复
+		anim.setRepeatCount(Animation.INFINITE);
+		holder.image.startAnimation(anim);
+		
 		ImageListener listener = ImageLoader.getImageListener(holder.image, R.drawable.welcom_icon, R.drawable.welcom_icon);
 		imageLoader.get(funny.getProfile_image(), listener,holder.image.getWidth(),holder.image.getHeight());
+		
+		holder.url.setTag("url"+i);
+		holder.url.setOnClickListener(new ClickItemListener(i,url));
+		
 		
 		return view;
 	}
@@ -92,4 +119,21 @@ public class FunnyListAdapter extends BaseAdapter{
 		TextView text;
 		TextView url;
 	}
+	class ClickItemListener implements View.OnClickListener{
+		private int position;
+		private String url;
+		public ClickItemListener(int position ,String url) {
+			this.position = position;
+			this.url = url;
+		}
+
+		@Override
+		public void onClick(View view) {
+			Intent intent = new Intent(context, WebViewActivity.class);
+			intent.putExtra("_url", url);
+			context.startActivity(intent);
+		}
+	}
+	
+	
 }

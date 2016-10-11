@@ -47,7 +47,7 @@ public class FunnyModel implements IFunnyModel{
 						
 					}
 				} catch (JSONException e) {
-					// TODO: handle exception
+					
 					e.printStackTrace();
 				}
 				

@@ -44,6 +44,7 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
+        <activity android:name="demo.copy.baisi.activity.WebViewActivity"></activity>
     </application>
 
 </manifest>
