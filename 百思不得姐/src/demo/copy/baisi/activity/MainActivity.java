@@ -30,6 +30,7 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 @ContentView(R.layout.activity_main)
 public class MainActivity extends FragmentActivity {
 	//qqq
+	//yhx
 	@ViewInject(R.id.vp_content)
 	private ViewPager vpContent;
 	@ViewInject(R.id.rg_bottom_buttons)
