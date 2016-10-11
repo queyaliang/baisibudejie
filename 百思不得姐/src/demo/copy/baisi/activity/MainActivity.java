@@ -34,6 +34,8 @@ public class MainActivity extends FragmentActivity {
 	//yhx
 
 	//queyaliang
+	
+	//pmq
 
 	@ViewInject(R.id.vp_content)
 	private ViewPager vpContent;
