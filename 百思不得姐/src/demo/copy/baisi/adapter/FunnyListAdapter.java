@@ -91,15 +91,15 @@ public class FunnyListAdapter extends BaseAdapter{
 		Log.i("YYYYY", ""+funny.getProfile_image());
 //		x.image().bind(holder.cvuser,funny.getProfile_image());
 		holder.image.measure(34, 34);
-		int width = holder.image.getMeasuredWidth();
-		int height = holder.image.getMeasuredHeight();
-		RotateAnimation anim = new RotateAnimation(0, 360, 26, 26);
-		anim.setDuration(10000);
-		//匀速旋转
-		anim.setInterpolator(new LinearInterpolator());
-		//无限重复
-		anim.setRepeatCount(Animation.INFINITE);
-		holder.image.startAnimation(anim);
+//		int width = holder.image.getMeasuredWidth();
+//		int height = holder.image.getMeasuredHeight();
+//		RotateAnimation anim = new RotateAnimation(0, 360, 26, 26);
+//		anim.setDuration(10000);
+//		//匀速旋转
+//		anim.setInterpolator(new LinearInterpolator());
+//		//无限重复
+//		anim.setRepeatCount(Animation.INFINITE);
+//		holder.image.startAnimation(anim);
 		
 		ImageListener listener = ImageLoader.getImageListener(holder.image, R.drawable.welcom_icon, R.drawable.welcom_icon);
 		imageLoader.get(funny.getProfile_image(), listener,holder.image.getWidth(),holder.image.getHeight());
