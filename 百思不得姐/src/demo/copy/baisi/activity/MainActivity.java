@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
-		//
+		/////////////
 		//…Ë÷√Adapter
 		setAdapter();
 		//…Ë÷√Listener
