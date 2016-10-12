@@ -49,6 +49,7 @@ public class MineFragment extends Fragment implements IMineView{
 	private RelativeLayout itemSettings;
 
 	private IMinePresenter presenter;
+	private String name;
 
 
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
@@ -73,7 +74,7 @@ public class MineFragment extends Fragment implements IMineView{
 
 	private void setListener() {
 		ivPhoto.setOnClickListener(new MineListener());
-
+		
 	}
 
 	/**
@@ -95,11 +96,11 @@ public class MineFragment extends Fragment implements IMineView{
 	@Override
 	public void updateUserInfo() {
 		User user = BaisiApplication.getApplication().getCurrentUser();
-		String name = user.getNickname();
-		tvNickname.setText(name);
+		name = user.getNickname();
+		
 		//		Log.i("demo", "user.getBitmap()-->"+user.getBitmap());
 		Avatar myAvatar = readUser(name);
-		if (name.equals(myAvatar.getName())) {
+		if (myAvatar!=null) {
 			ivPhoto.setImageBitmap(myAvatar.getBitmap());
 		}
 
@@ -149,8 +150,7 @@ public class MineFragment extends Fragment implements IMineView{
 			avatar.setName(newname);
 			avatar.setBitmap(bitmap);
 			Log.i("demo", "mine-->name-->"+newname);
-			tvNickname.setText(newname);
-			ivPhoto.setImageBitmap(bitmap);
+			
 			saveUser(newname);
 		}
 	}
@@ -159,30 +159,30 @@ public class MineFragment extends Fragment implements IMineView{
 		SharedPreferences share = getActivity().getSharedPreferences("bitmapIndex", getActivity().MODE_PRIVATE);
 		Editor editor = share.edit();
 		editor.putString(name, path);
-
 		editor.commit();
 	}
 	public Avatar readUser(String name) {
 		SharedPreferences share = getActivity().getSharedPreferences("bitmapIndex", getActivity().MODE_PRIVATE);
 		String path = share.getString(name,"");
-		Avatar myavatar = new Avatar();
+		Avatar myavatar = null;
 		if (path!=null) {
+			myavatar = new Avatar();
 			Bitmap bitmap = BitmapFactory.decodeFile(path);
 			myavatar.setBitmap(bitmap);
 			myavatar.setName(name);
 		}
 		return myavatar;
 	}
-	//	@Override
-	//	public void onResume() {
-	//		super.onResume();
-	//		if (newname!=null) {
-	//			tvNickname.setText(newname);
-	//		}
-	//		if (bitmap!=null) {
-	//			ivPhoto.setImageBitmap(bitmap);
-	//		}
-	//	}
+		@Override
+		public void onResume() {
+			super.onResume();
+			if (newname!=null) {
+				tvNickname.setText(newname);
+			}
+			if (bitmap!=null) {
+				ivPhoto.setImageBitmap(bitmap);
+			}
+		}
 
 
 }
