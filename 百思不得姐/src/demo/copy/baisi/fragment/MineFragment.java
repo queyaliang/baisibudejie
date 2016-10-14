@@ -52,7 +52,7 @@ public class MineFragment extends Fragment implements IMineView{
 	private IMinePresenter presenter;
 //	private String name;
 
-
+///
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
 
 
@@ -65,7 +65,7 @@ public class MineFragment extends Fragment implements IMineView{
 		x.view().inject(this, view);
 
 		setListener();
-		//×Ô¶¯µÇÂ¼
+		//ï¿½Ô¶ï¿½ï¿½ï¿½Â¼
 		String token = BaisiApplication.getApplication().getToken();
 		if(token != null) {
 			presenter.loginWithoutPwd(token);
@@ -79,7 +79,7 @@ public class MineFragment extends Fragment implements IMineView{
 	}
 
 	/**
-	 * ´¦Àí¼àÌý
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	class MineListener implements View.OnClickListener{
 
