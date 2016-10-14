@@ -39,6 +39,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MineFragment extends Fragment implements IMineView{
+	//
 	@ViewInject(R.id.ivPhoto)
 	private ImageView ivPhoto;
 	@ViewInject(R.id.tvNickname)
