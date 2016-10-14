@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -36,6 +37,7 @@ public class WebViewActivity extends Activity {
 			Log.i("demo", "url-->"+url);
 			//把数据加载到webview控件中
 			webview.loadUrl(url);
+			webview.setBackgroundColor(Color.BLACK);
 			//用系统或其他浏览器浏览该链接
 			webview.setWebViewClient(new WebViewClient(){
 				

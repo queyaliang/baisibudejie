@@ -63,6 +63,7 @@ public class PictureFragment extends Fragment implements IPictureView,
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.picture_fragment, null);
 		x.view().inject(this, view);
+		listView.setPullLoadEnable(true);
 		picturePresenter.loadPicture(page);
 		// ����̧ͷ���
 		setHeaderName();

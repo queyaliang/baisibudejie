@@ -1,5 +1,6 @@
 package demo.copy.baisi.adapter;
 
+import java.io.File;
 import java.util.List;
 
 import org.xutils.x;
@@ -9,6 +10,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +49,7 @@ public class PictureAdapter extends BaseAdapter {
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader;
 	private ListView listview;	
+	File file = new File(BaisiApplication.getApplication().getCacheDir(), "webcache");
 
 	public PictureAdapter(List<Pictures> list, Context context,
 			ListView listView) {
@@ -122,42 +125,37 @@ public class PictureAdapter extends BaseAdapter {
 		holder.webView.setHorizontalScrollBarEnabled(false);//水平不显示  
 		holder.webView.setVerticalScrollBarEnabled(false); //垂直不显示 
 		holder.webView.setBackgroundColor(Color.BLACK);
+		
+		holder.webView.loadUrl(BaisiApplication.getApplication().getCacheDir()+"/a005.jpg");
 		WebSettings webSettings = holder.webView.getSettings();
 		
 //		settings.setJavaScriptCanOpenWindowsAutomatically(true);
 		webSettings.setJavaScriptEnabled(true);//璁剧疆鏀寔Js,蹇呴』璁剧疆鐨�涓嶇劧缃戦〉鍩烘湰涓婁笉鑳界湅
 ////		settings.setDisplayZoomControls(true);// 璁剧疆鏄剧ず缂╂斁鎸夐挳
 		webSettings.setSupportZoom(true);  // 鏀寔缂╂斁
-//		settings.setBuiltInZoomControls(true);  // 璁剧疆鏄惁鍏佽webview浣跨敤缂╂斁鐨勫姛鑳�鎴戣繖閲岃涓篺alse,涓嶅厑璁�	
-//		settings.setUseWideViewPort(true);  //璁剧疆涓轰娇鐢╳ebview鎺ㄨ崘鐨勭獥鍙�
-		webSettings.setLoadWithOverviewMode(true);//璁剧疆缃戦〉鑷�搴斿睆骞曞ぇ灏�
+		webSettings.setBuiltInZoomControls(true);  // 璁剧疆鏄惁鍏佽webview浣跨敤缂╂斁鐨勫姛鑳�鎴戣繖閲岃涓篺alse,涓嶅厑璁�	
+		webSettings.setUseWideViewPort(true);  //璁剧疆涓轰娇鐢╳ebview鎺ㄨ崘鐨勭獥鍙�
+//		webSettings.setLoadWithOverviewMode(true);//璁剧疆缃戦〉鑷�搴斿睆骞曞ぇ灏�
 ////		settings.setDefaultZoom(ZoomDensity.FAR); 
 		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);//适应内容大小
-////		settings.setRenderPriority(RenderPriority.HIGH); //鎻愰珮缃戦〉娓叉煋鐨勪紭鍏堢骇 		
+//		webSettings.setRenderPriority(RenderPriority.HIGH); //鎻愰珮缃戦〉娓叉煋鐨勪紭鍏堢骇 		
 
-		// User settings  
 		
-//		webSettings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+		
 //		webSettings.setUseWideViewPort(true);
-//		webSettings.setSavePassword(false);
-//		webSettings.setSaveFormData(false);
-//		webSettings.setBlockNetworkLoads(true);
-		
-		webSettings.setUseWideViewPort(true);
 		webSettings.setLoadWithOverviewMode(true);
 		
 		  
-//		webSettings.setJavaScriptEnabled(true);  
-//		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);  
-//		webSettings.setUseWideViewPort(true);//关键点  
-//		  
-//		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);  
-//		      
-//		webSettings.setDisplayZoomControls(false);  
-//		webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本  
-//		webSettings.setAllowFileAccess(true); // 允许访问文件  
-		webSettings.setBuiltInZoomControls(true); // 设置显示缩放按钮  
+//		webSettings.setBuiltInZoomControls(true); // 设置显示缩放按钮  
 		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+		webSettings.setDatabasePath(file.getAbsolutePath());
+		webSettings.setAppCachePath(file.getAbsolutePath());
+		webSettings.setDomStorageEnabled(true);
+		webSettings.setDatabaseEnabled(true);
+		webSettings.setAppCacheEnabled(true);
+		
+		
+		
 //		webSettings.setSupportZoom(true); // 支持缩放  
 //		  
 //		  
