@@ -23,7 +23,7 @@
         android:layout_alignParentTop="true"
         android:gravity="left|center"
         android:layout_marginLeft="20dp"
-        android:textSize="11sp"
+        android:textSize="10sp"
         android:textColor="#111111"
         />
     <TextView 
@@ -33,7 +33,7 @@
         android:layout_toRightOf="@+id/tv_name"
         android:layout_marginLeft="20dp"
         android:text="2010/10/05"
-        android:textSize="10sp"
+        android:textSize="11sp"
         android:singleLine="true"
         android:layout_marginRight="20dp"
         android:textColor="#777777"
@@ -42,13 +42,13 @@
   <TextView 
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="15dp"
         android:layout_below="@+id/tv_name"
         android:layout_toRightOf="@+id/iv_profil_image"
         android:layout_marginLeft="20dp"
         android:text="青春之歌"
         android:singleLine="true"
-        android:textSize="13sp"
+        android:textSize="10sp"
         android:gravity="bottom"
         />
 
