@@ -9,119 +9,126 @@ import demo.copy.baisi.R;
 
 import demo.copy.baisi.activity.VoiceDetailActivity;
 import demo.copy.baisi.adapter.VoiceAdapter;
+import demo.copy.baisi.defineview.XListView;
+import demo.copy.baisi.defineview.XListView.IXListViewListener;
 import demo.copy.baisi.entity.Voice;
 import demo.copy.baisi.presenter.IVoicePresenter;
 import demo.copy.baisi.presenter.impl.Voicepresenter;
 import demo.copy.baisi.view.IVoiceView;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VoiceFragment extends Fragment implements IVoiceView{
+public class VoiceFragment extends Fragment implements IVoiceView,IXListViewListener{
 	@ViewInject(R.id.tv_app_header)
 	private TextView tvHeader;
-	@ViewInject(R.id.lv_load_voice)
-	private ListView lvLoadVoice;
-	private List<Voice> voices ;
-	private IVoicePresenter VoicePresenter;
-	private VoiceAdapter adapter;
-	public VoiceFragment() {
-		VoicePresenter = new Voicepresenter(this);
-	}
-
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.voice_fragment , null);
-		x.view().inject(this, view);
-
-		//ÉèÖÃÌ§Í·Ãû³Æ
-		setHeaderName();
-		VoicePresenter.LoadVoiceList(1);
-		setListeners();
-		return view;
-	}
-
-	/**
-	 * ÉèÖÃÌ§Í·Ãû³Æ
-	 */
-	private void setHeaderName() {
-		tvHeader.setText("ÉùÒô");
-		
-	}
-	private void setListeners() {
-		//¹ö¶¯listViewÊ±Ö´ĞĞ£¬¸üĞÂÏÂÒ»Ò³voice
-		lvLoadVoice.setOnScrollListener(new OnScrollListener() {
-			boolean isBottom = false;
-			boolean requesting = false;
-			int page = 2;
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				
-				switch (scrollState) {
-				case OnScrollListener.SCROLL_STATE_IDLE:
-					//ÅĞ¶ÏÊÇ·ñµ½µ×ÁË
-					if(isBottom && !requesting){//¼ÓÔØÏÂÒ»Ò³
-						requesting = true;
-						VoicePresenter.LoadVoiceList(page++);
-						if(voices==null || voices.isEmpty()){//·şÎñ¶Ë·µ»ØµÄÊÇ¿Õ¼¯ºÏ
-							Toast.makeText(getActivity(), "Ä¾ÓĞÊı¾İÁË", Toast.LENGTH_SHORT).show();
-							requesting = false;
-							return;
-						}
-						//°ÑĞÂµÃµ½µÄvoiceÊı¾İÈ«²¿Ìí¼Óµ½¾ÍvoicesÁĞ±íÖĞ
-						adapter.notifyDataSetChanged();
-						//ÁĞ±í¸üĞÂÍê±Ï °Ñrequesting¸Ä³Éfalse
-						requesting = false;
-					}
-					break;
-				case OnScrollListener.SCROLL_STATE_TOUCH_SCROLL:
-					break;
-				case OnScrollListener.SCROLL_STATE_FLING:
-					break;
-				}
-			}
-			//µ±¹ö¶¯Ê±Ö´ĞĞ  ¸Ã·½·¨µÄÖ´ĞĞÆµÂÊ·Ç³£¸ß
-			public void onScroll(AbsListView view, int firstVisibleItem,
-					int visibleItemCount, int totalItemCount) {
-
-				if(firstVisibleItem + visibleItemCount == totalItemCount){
-					isBottom = true;
-				}else{
-					isBottom = false;
-				}
+	@ViewInject(R.id.lv_voice_fragment)
+	private XListView listView;	
+	private IVoicePresenter voicePresenter;
+	private List<Voice> voices;
+	private VoiceAdapter voiceAdapter;
+	private int page=1;
+	private Handler mHandler;
+		public VoiceFragment(){
+			voicePresenter=new Voicepresenter(this);
+		}
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			View view = inflater.inflate(R.layout.voice_fragment, null);
+			x.view().inject(this, view);
+			voicePresenter.LoadVoiceList(page);
+			listView.setPullLoadEnable(true);// ç’å‰§ç–†ç’â•ç• æ¶“å©ƒåªºé”›å­ALSEæ¶“è½°ç¬‰ç’â•€ç¬‚é·å¤›ç´æ¸šå¤¸ç¬‰é”çŠºæµ‡é‡æ‘î˜¿éç‰ˆåµ
 			
+			setHeaderName();
+			setListeners();
+			return view;
+		}
+		private void setListeners() {
+			listView.setXListViewListener(this);
+			mHandler = new Handler();
+			
+			//ç‚¹å‡»itemè·³è½¬activityç›‘å¬
+			listView.setOnItemClickListener(new OnItemClickListener() {
+						public void onItemClick(AdapterView<?> arg0, View view, int position,
+								long arg3) {
+							Voice voice = voices.get(position);
+							Intent intent = new Intent(getActivity(),VoiceDetailActivity.class);
+							intent.putExtra("voice", voice);
+							startActivity(intent);
+						}
+					});
+		}
+		/**
+		 * é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·æŠ¬å¤´é”Ÿæ–¤æ‹·é”Ÿï¿½
+		 */
+		private void setHeaderName() {
+			tvHeader.setText("æ®µå­");
+			
+		}
+		
+		
+		/** é‹æ»„î„›é’é”‹æŸŠé”›ï¿½ */
+		private void onLoad() {
+			Log.i("demo", "onload()-->page="+page);
+			listView.stopRefresh();
+			listView.stopLoadMore();
+			listView.setRefreshTime("åˆšåˆš");
+		}
+		@Override
+		public void onRefresh() {
+			if (page==1) {
+				listView.setStopFrash(false);
+				Toast.makeText(getActivity(), "å·²ç»ä¸ºç¬¬ä¸€é¡µ", Toast.LENGTH_SHORT).show();
+				return;
 			}
-		});
-		//µã»÷itemÌø×ªactivity¼àÌı
-		lvLoadVoice.setOnItemClickListener(new OnItemClickListener() {
-			public void onItemClick(AdapterView<?> arg0, View view, int position,
-					long arg3) {
-				Voice voice = voices.get(position);
-				Intent intent = new Intent(getActivity(),VoiceDetailActivity.class);
-				intent.putExtra("voice", voice);
-				startActivity(intent);
+			page--;
+			mHandler.postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					
+					getData();
+				}
+			}, 2000);
+		}
+		@Override
+		public void onLoadMore() {
+			Log.i("demo", "loadMore-->page="+page);
+			if (page==200) {
+				listView.setStopLoading(false);
+				Toast.makeText(getActivity(), "å·²ç»å…¨éƒ¨åŠ è½½å®Œæˆ", Toast.LENGTH_SHORT).show();
+				return;
 			}
-		});
-	}
+			page++;
+			mHandler.postDelayed(new Runnable() {
 
-	/**
-	 * 
-	 * Òì²½ÈÎÎñ½áÊøºó£¬µÃµ½voiceÁĞ±íºó£¬¸üĞÂAdapter
-	 */
-	public void updateList(List<Voice> voices) {
-		this.voices = voices;
-		 adapter = new VoiceAdapter(this.voices,getActivity());
-		lvLoadVoice.setAdapter(adapter);
-	}
-	
+				@Override
+				public void run() {
+					
+					getData();
+				}
+			}, 2000);
+		}
+		private void getData(){
+			voicePresenter.LoadVoiceList(page);
+		}
+		@Override
+		public void updateList(final List<Voice> voices) {
+
+			Log.i("aaaa", ""+voices.toString());
+			this.voices=voices;
+			voiceAdapter=new VoiceAdapter(voices, getActivity());
+			listView.setAdapter(voiceAdapter);
+			onLoad();
+		}
+		
 }
