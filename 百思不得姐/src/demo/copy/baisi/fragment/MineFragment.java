@@ -51,7 +51,7 @@ public class MineFragment extends Fragment implements IMineView{
 
 	private IMinePresenter presenter;
 //	private String name;
-
+//
 ///
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
 
