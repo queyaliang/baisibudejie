@@ -29,15 +29,6 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends FragmentActivity {
-	
-	//qqq
-
-	//yhx111111111
-
-	//queyaliang123123
-	
-	//pmq
-
 	@ViewInject(R.id.vp_content)
 	private ViewPager vpContent;
 	@ViewInject(R.id.rg_bottom_buttons)
@@ -55,9 +46,9 @@ public class MainActivity extends FragmentActivity {
 	@ViewInject(R.id.rbtn_mine)
 	private RadioButton rbtnMine;
 
-	//Fragment¼¯ºÏ
+	//Fragmentï¿½ï¿½ï¿½ï¿½
 	private List<Fragment> fragments = new ArrayList<Fragment>();
-	//ViewPagerÊÊÅäÆ÷
+	//ViewPagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private MainPagerAdapter pagerAdapter;
 
 	@Override
@@ -65,13 +56,13 @@ public class MainActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
 		/////////////
-		//ÉèÖÃAdapter
+		//ï¿½ï¿½ï¿½ï¿½Adapter
 		setAdapter();
-		//ÉèÖÃListener
+		//ï¿½ï¿½ï¿½ï¿½Listener
 		setListener();
 	}
 	/**
-	 * ¸øviewpagerÅäÖÃÊÊÅäÆ÷
+	 * ï¿½ï¿½viewpagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void setAdapter() {
 		fragments = new ArrayList<Fragment>();
@@ -81,17 +72,17 @@ public class MainActivity extends FragmentActivity {
 		fragments.add(new RadioFragment());
 		fragments.add(new SearchFragment());
 		fragments.add(new MineFragment());
-		//¹¹½¨Adapter
+		//ï¿½ï¿½ï¿½ï¿½Adapter
 		pagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), fragments);
 		vpContent.setAdapter(pagerAdapter);
 		vpContent.setOffscreenPageLimit(3);
 	}
 	/**
-	 * ÉèÖÃ¼àÌıÆ÷
+	 * ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void setListener() {
 
-		//radioButton¼àÌıÆ÷
+		//radioButtonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		rgBottomButtons.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -121,7 +112,7 @@ public class MainActivity extends FragmentActivity {
 			}
 		});
 
-		//viewpager¼àÌıÆ÷
+		//viewpagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		vpContent.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override

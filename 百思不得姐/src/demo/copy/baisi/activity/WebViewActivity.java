@@ -50,6 +50,9 @@ public class WebViewActivity extends Activity {
 			WebSettings settings =webview.getSettings();
 			
 			settings.setJavaScriptEnabled(true);
+			settings.setUseWideViewPort(true);
+			settings.setLoadWithOverviewMode(true);
+			settings.setCacheMode(WebSettings.LOAD_DEFAULT);
 			
 			webview.setWebChromeClient(new WebChromeClient(){
 				@Override

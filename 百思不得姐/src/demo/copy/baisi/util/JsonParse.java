@@ -11,6 +11,7 @@ import android.util.Log;
 
 import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.entity.Picture;
+import demo.copy.baisi.entity.Pictures;
 import demo.copy.baisi.entity.Radio;
 import demo.copy.baisi.entity.Voice;
 
@@ -90,8 +91,30 @@ public class JsonParse {
 		return funnys;
 	}
 	
-	
-	
+	public static List<Pictures> parsePictureList(JSONArray array)throws JSONException{
+		List<Pictures> funnys=new ArrayList<Pictures>();
+		for(int i=0; i<array.length(); i++){
+			JSONObject object=array.getJSONObject(i);
+			Pictures picture=new Pictures();
+
+			picture.setText(object.getString("text"));
+			picture.setHate(object.getInt("hate"));
+			picture.setWeixin_url(object.getString("weixin_url"));
+			picture.setType(object.getInt("type"));
+			picture.setId(object.getInt("id"));
+			picture.setLove(object.getInt("love"));
+			picture.setName(object.getString("name"));
+			picture.setCreate_time(object.getString("create_time"));
+			picture.setProfile_image(object.getString("profile_image"));
+			picture.setImage0(object.getString("image0"));
+			picture.setImage1(object.getString("image1"));
+			picture.setImage2(object.getString("image2"));
+			picture.setImage3(object.getString("image3"));			
+			funnys.add(picture);
+		}
+		return funnys;
+
+	}
 	
 	
 	
