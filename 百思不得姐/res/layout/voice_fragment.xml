@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#d5203b"
-        android:text="图片"
+        android:text="声音"
         android:textSize="18sp"
         android:gravity="center"
         android:textColor="#ffffff"

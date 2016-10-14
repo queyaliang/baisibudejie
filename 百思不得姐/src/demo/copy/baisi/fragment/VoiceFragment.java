@@ -49,7 +49,6 @@ public class VoiceFragment extends Fragment implements IVoiceView,IXListViewList
 			voicePresenter.LoadVoiceList(page);
 			listView.setPullLoadEnable(true);// 璁剧疆璁╁畠涓婃媺锛孎ALSE涓轰笉璁╀笂鎷夛紝渚夸笉鍔犺浇鏇村鏁版嵁
 			
-			setHeaderName();
 			setListeners();
 			return view;
 		}
@@ -67,13 +66,6 @@ public class VoiceFragment extends Fragment implements IVoiceView,IXListViewList
 							startActivity(intent);
 						}
 					});
-		}
-		/**
-		 * 锟斤拷锟斤拷抬头锟斤拷锟�
-		 */
-		private void setHeaderName() {
-			tvHeader.setText("段子");
-			
 		}
 		
 		
