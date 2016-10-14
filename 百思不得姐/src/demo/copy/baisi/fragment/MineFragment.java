@@ -39,6 +39,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MineFragment extends Fragment implements IMineView{
+	//
 	@ViewInject(R.id.ivPhoto)
 	private ImageView ivPhoto;
 	@ViewInject(R.id.tvNickname)
@@ -49,7 +50,7 @@ public class MineFragment extends Fragment implements IMineView{
 	private RelativeLayout itemSettings;
 
 	private IMinePresenter presenter;
-	private String name;
+//	private String name;
 
 
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
@@ -96,27 +97,33 @@ public class MineFragment extends Fragment implements IMineView{
 	@Override
 	public void updateUserInfo() {
 		User user = BaisiApplication.getApplication().getCurrentUser();
-		name = user.getNickname();
+		String name = user.getNickname();
 		
 		//		Log.i("demo", "user.getBitmap()-->"+user.getBitmap());
 		Avatar myAvatar = readUser(name);
+		tvNickname.setText(name);
+		
 		if (myAvatar!=null) {
 			ivPhoto.setImageBitmap(myAvatar.getBitmap());
+			
 		}
+		
 
 	}
 
 	Avatar avatar = new Avatar();
 	private String newname;
+	
+//	private String path;
 	private Bitmap bitmap;
-	private String path;
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (resultCode==Activity.RESULT_OK) {
 			newname = data.getStringExtra("_name");
 			bitmap = data.getParcelableExtra("_avatar");
+			String path=null;
 			if (bitmap!=null) {
-				path = Environment.getExternalStorageDirectory()+"/bitmap"+bitmap.hashCode();
+				path = Environment.getExternalStorageDirectory()+"/bitmap"+newname;
 				File file = new File(path);
 				try {
 					file.createNewFile();
@@ -143,6 +150,9 @@ public class MineFragment extends Fragment implements IMineView{
 				Avatar avatarr =readUser(newname);
 				if (newname.equals(avatarr.getName())) {
 					bitmap=avatarr.getBitmap();
+					if (bitmap==null) {
+						bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.touxiang);
+					}
 				}else {
 					bitmap=BitmapFactory.decodeResource(getResources(), R.drawable.touxiang);
 				}
@@ -150,26 +160,28 @@ public class MineFragment extends Fragment implements IMineView{
 			avatar.setName(newname);
 			avatar.setBitmap(bitmap);
 			Log.i("demo", "mine-->name-->"+newname);
-			
-			saveUser(newname);
+			if (path!=null) {
+				
+				saveUser(newname,path);
+			}
 		}
 	}
 
-	public void saveUser(String name) {
+	public void saveUser(String name,String path) {
 		SharedPreferences share = getActivity().getSharedPreferences("bitmapIndex", getActivity().MODE_PRIVATE);
 		Editor editor = share.edit();
-		editor.putString(name, path);
+		editor.putString(""+name, path);
 		editor.commit();
 	}
-	public Avatar readUser(String name) {
+	public Avatar readUser(String names) {
 		SharedPreferences share = getActivity().getSharedPreferences("bitmapIndex", getActivity().MODE_PRIVATE);
-		String path = share.getString(name,"");
+		String path = share.getString(names,"");
 		Avatar myavatar = null;
 		if (path!=null) {
 			myavatar = new Avatar();
 			Bitmap bitmap = BitmapFactory.decodeFile(path);
 			myavatar.setBitmap(bitmap);
-			myavatar.setName(name);
+			myavatar.setName(names);
 		}
 		return myavatar;
 	}
