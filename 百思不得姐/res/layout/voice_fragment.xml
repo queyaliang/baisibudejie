@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <TextView
-        android:id="@+id/tv_title"
+    android:layout_height="match_parent" >
+     <TextView 
+        android:id="@+id/tv_app_header"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="40dp"
+        android:background="#d5203b"
         android:text="声音"
+        android:textSize="18sp"
         android:gravity="center"
-        android:textSize="16sp"
-        android:background="#d6203b"
         android:textColor="#ffffff"
-         />
-    <ListView
-        android:id="@+id/lv_content"
+        />
+    <demo.copy.baisi.defineview.XListView
+        android:id="@+id/lv_voice_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_app_header"
          >
-    </ListView>
-
-
-</LinearLayout>
+</demo.copy.baisi.defineview.XListView>
+</RelativeLayout>

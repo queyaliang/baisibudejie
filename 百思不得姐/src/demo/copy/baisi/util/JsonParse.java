@@ -7,12 +7,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import android.util.Log;
 
 import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.entity.Picture;
 import demo.copy.baisi.entity.Pictures;
 import demo.copy.baisi.entity.Radio;
+import demo.copy.baisi.entity.User;
 import demo.copy.baisi.entity.Voice;
 
 public class JsonParse {
@@ -70,6 +72,18 @@ public class JsonParse {
 		
 		
 		return objects;
+	}
+	public static User parseUser(JSONObject obj) throws JSONException{
+		User user = new User();
+		user.setEmail(obj.getString("email"));
+		user.setEmailVerify(obj.getBoolean("emailVerify"));
+		user.setEmailVerifyCode(obj.getString("emailVerifyCode"));
+		user.setId(obj.getInt("id"));
+		user.setLastLoginIp(obj.getString("lastLoginIp"));
+		user.setLastLoginTime(obj.getLong("lastLoginTime"));
+		user.setNickname(obj.getString("nickname"));
+		user.setPassword(obj.getString("password"));
+		return user;
 	}
 	
 	public static List<Funny> parseFunnyList(JSONArray array)throws JSONException{

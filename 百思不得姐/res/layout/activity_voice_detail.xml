@@ -1,0 +1,144 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VoiceDetailActivity" >
+
+    <ImageView
+        android:id="@+id/iv_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tu1" />
+
+    <ImageView
+        android:id="@+id/civ_profil_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/welcom_icon" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="40dp"
+        android:layout_toRightOf="@+id/civ_profil_image"
+        android:gravity="left|center"
+        android:text="一个人的时候"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_publish_time"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@+id/tv_name"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@+id/civ_profil_image"
+        android:gravity="left|bottom"
+        android:text="2010/10/05"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/iv_image3"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_below="@+id/civ_profil_image"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="0dp"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/tu1" />
+
+    <ImageButton
+        android:id="@+id/ib_play_or_pause"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/iv_image3"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="30dp"
+        android:background="@null"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:src="@drawable/selector_button_play"
+        android:layout_marginBottom="20dp"
+         />
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ib_play_or_pause"
+        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="13dp"
+        android:layout_toRightOf="@+id/ib_play_or_pause"
+        android:maxHeight="4dp"
+        android:minHeight="4dp"
+        android:layout_marginRight="20dp"
+        android:thumb="@drawable/ic_seekbar_thumb"
+        android:thumbOffset="3dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar1"
+        android:background="#ffffff" 
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        >
+
+        <ImageButton
+            android:id="@+id/ib_zan"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:src="@drawable/zan1"
+             />
+
+        <TextView
+            android:id="@+id/tv_zan"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:text="100"
+            android:textColor="#ff0000"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/ib_tucao"
+           android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:src="@drawable/tucao1" />
+
+        <TextView
+            android:id="@+id/tv_tucao"
+          android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="left|center"
+            android:text="50"
+            android:textColor="#ff0000"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/ib_fenxiang"
+           android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:src="@drawable/fenxiang1" />
+    </LinearLayout>
+
+</RelativeLayout>
