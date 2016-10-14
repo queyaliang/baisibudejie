@@ -33,6 +33,7 @@ public class RegistActivity extends Activity implements IRegistView{
 
 	public RegistActivity() {
 		presenter = new RegistPresenter(this);
+		//
 	}
 
 	@Override
