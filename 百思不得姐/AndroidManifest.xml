@@ -42,10 +42,12 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
+        <activity android:name="demo.copy.baisi.activity.VoiceDetailActivity"></activity>
         <activity android:name="demo.copy.baisi.activity.WebViewActivity"></activity>
         <activity android:name="demo.copy.baisi.activity.LoginActivity"></activity>
         <activity android:name="demo.copy.baisi.activity.RegistActivity"></activity>
         <activity android:name="demo.copy.baisi.activity.ImageActivity"></activity>
+        <service android:name="demo.copy.baisi.service.VoicePlayerService"></service>
     </application>
 
 </manifest>

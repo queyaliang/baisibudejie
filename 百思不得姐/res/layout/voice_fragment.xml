@@ -7,15 +7,16 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="#d5203b"
-        android:text="图片"
+        android:text="声音"
         android:textSize="18sp"
         android:gravity="center"
         android:textColor="#ffffff"
         />
-     <ListView 
-         android:id="@+id/lv_load_voice"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent"
-         android:layout_below="@+id/tv_app_header"
-         ></ListView>
+    <demo.copy.baisi.defineview.XListView
+        android:id="@+id/lv_voice_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_app_header"
+         >
+</demo.copy.baisi.defineview.XListView>
 </RelativeLayout>

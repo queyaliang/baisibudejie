@@ -14,19 +14,17 @@ import demo.copy.baisi.view.IVoiceView;
 public class Voicepresenter implements IVoicePresenter {
 	private IVoiceModel model;
 	private IVoiceView view;
-	private List<Voice> voiceses = new ArrayList<Voice>();
 	
 	public Voicepresenter( IVoiceView view) {
 		this.model = new VoiceModel();
 		this.view = view;
 	}
 
-	public void LoadVoiceList(int i) {
-		model.LoadVoiceList(i ,new VoiceModelCallback() {
+	public void LoadVoiceList(int page) {
+		model.LoadVoiceList(page ,new VoiceModelCallback() {
 			public void onSuccess(Object success) {
 				List<Voice> voices = (List<Voice>) success;
-				voiceses.addAll(voices);
-				view.updateList(voiceses);
+				view.updateList(voices);
 			}
 			public void onError(Object error) {
 			}
