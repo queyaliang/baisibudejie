@@ -10,6 +10,7 @@ import demo.copy.baisi.R;
 import demo.copy.baisi.R.layout;
 import demo.copy.baisi.R.menu;
 import demo.copy.baisi.adapter.MainPagerAdapter;
+import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.fragment.FunnyFragment;
 import demo.copy.baisi.fragment.MineFragment;
 import demo.copy.baisi.fragment.PictureFragment;
@@ -55,7 +56,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
-		/////////////
+		BaisiApplication.getApplication().addActivity(this);
 		//����Adapter
 		setAdapter();
 		//����Listener
@@ -145,6 +146,11 @@ public class MainActivity extends FragmentActivity {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 
 

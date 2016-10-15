@@ -8,6 +8,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 
+import net.youmi.android.AdManager;
+import net.youmi.android.offers.OffersManager;
+
 import org.xutils.x;
 import org.xutils.view.annotation.ViewInject;
 
@@ -48,6 +51,10 @@ public class MineFragment extends Fragment implements IMineView{
 	private RelativeLayout itemExit;
 	@ViewInject(R.id.itemSettings)
 	private RelativeLayout itemSettings;
+	@ViewInject(R.id.tv_exit)
+	private TextView tvExit;
+	@ViewInject(R.id.tv_recommend)
+	private TextView tvRecommend;
 
 	private IMinePresenter presenter;
 //	private String name;
@@ -74,8 +81,10 @@ public class MineFragment extends Fragment implements IMineView{
 	}
 
 	private void setListener() {
-		ivPhoto.setOnClickListener(new MineListener());
-		
+		MineListener listener = new MineListener();
+		ivPhoto.setOnClickListener(listener);
+		tvExit.setOnClickListener(listener);
+		tvRecommend.setOnClickListener(listener);
 	}
 
 	/**
@@ -90,6 +99,23 @@ public class MineFragment extends Fragment implements IMineView{
 				Intent i = new Intent(getActivity(), LoginActivity.class);
 				startActivityForResult(i, REQUEST_CODE_LOGIN_USER);
 				break;
+			case R.id.tv_exit:
+				BaisiApplication.getApplication().exit();
+			case R.id.tv_recommend:
+				// 调有米的sdk
+				try {
+					// 显示积分墙，
+					// 显示在一个新的activity中，
+					// activity在jar
+					// youmi sdk 有一个activity,.xml,联网，解析，显示
+					AdManager.getInstance(getActivity()).init(
+							"893ce06024f53e92", "33510aece245f67b", false);
+					// 如果使用积分广告，请务必调用积分广告的初始化接口:
+					OffersManager.getInstance(getActivity()).onAppLaunch();
+					OffersManager.getInstance(getActivity()).showOffersWall();
+
+				} catch (Exception e) {
+				}
 			}
 		}
 	}

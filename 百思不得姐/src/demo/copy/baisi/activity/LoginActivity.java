@@ -54,6 +54,7 @@ public class LoginActivity extends Activity implements ILoginView {
 		presenter = new LoginPresenter(this);
 		//注入控件   初始�?		
 		x.view().inject(this);
+		BaisiApplication.getApplication().addActivity(this);
 		//添加监听
 		setListener();
 	}
@@ -127,5 +128,10 @@ public class LoginActivity extends Activity implements ILoginView {
 			bitmap = data.getParcelableExtra("xitong");
 		}
 		ivPhoto.setImageBitmap(bitmap);
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 }

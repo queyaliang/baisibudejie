@@ -1,6 +1,7 @@
 package demo.copy.baisi.activity;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.app.BaisiApplication;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -27,7 +28,7 @@ public class WebViewActivity extends Activity {
 		protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.activity_webview);
-			
+			BaisiApplication.getApplication().addActivity(this);
 			Intent intent = getIntent();
 			
 			//声明控件
@@ -140,6 +141,11 @@ public class WebViewActivity extends Activity {
 	private void init() {
 		//初始化控件
 		webview = (WebView) findViewById(R.id.wv);
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+	super.onDestroy();
 	}
 
 	@Override
