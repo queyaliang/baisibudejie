@@ -54,6 +54,7 @@ public class ImageActivity extends Activity implements OnItemClickListener ,OnCl
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_gridview_panel);
 		x.view().inject(this);
+		BaisiApplication.getApplication().addActivity(this);
 		
 		File savePath = new File(saveDir);
 		if (!savePath.exists()) {
@@ -220,6 +221,11 @@ public class ImageActivity extends Activity implements OnItemClickListener ,OnCl
 		Bitmap resizedBitmap = Bitmap.createBitmap(bitmap, 0, 0,
 				bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 		return resizedBitmap;
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 
 }

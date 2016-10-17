@@ -3,6 +3,7 @@ package demo.copy.baisi.activity;
 import demo.copy.baisi.R;
 import demo.copy.baisi.R.id;
 import demo.copy.baisi.R.layout;
+import demo.copy.baisi.app.BaisiApplication;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +19,7 @@ public class WelcomeActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_welcome);
+		BaisiApplication.getApplication().addActivity(this);
 		rlWelcome = (RelativeLayout) findViewById(R.id.rl_welcome);
 		new Handler(new Handler.Callback() {
 			@Override
@@ -29,5 +31,9 @@ public class WelcomeActivity extends Activity {
 			}
 		}).sendEmptyMessageDelayed(0, 2500);
 	}
-
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
+	}
 }

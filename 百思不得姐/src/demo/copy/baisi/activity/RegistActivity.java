@@ -13,6 +13,7 @@ import org.xutils.view.annotation.ViewInject;
 import org.xutils.x;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.User;
 import demo.copy.baisi.presenter.IRegistPresenter;
 import demo.copy.baisi.presenter.impl.RegistPresenter;
@@ -33,7 +34,7 @@ public class RegistActivity extends Activity implements IRegistView{
 
 	public RegistActivity() {
 		presenter = new RegistPresenter(this);
-		
+	//
 	}
 
 	@Override
@@ -41,6 +42,7 @@ public class RegistActivity extends Activity implements IRegistView{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_regist);
 		x.view().inject(this);
+		BaisiApplication.getApplication().addActivity(this);
 		presenter.loadImage();
 	}
 
@@ -77,5 +79,10 @@ public class RegistActivity extends Activity implements IRegistView{
 		if(bitmap != null){
 			ivCode.setImageBitmap(bitmap);
 		}
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 }

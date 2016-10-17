@@ -10,6 +10,7 @@ import demo.copy.baisi.R;
 import demo.copy.baisi.R.layout;
 import demo.copy.baisi.R.menu;
 import demo.copy.baisi.adapter.MainPagerAdapter;
+import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.fragment.FunnyFragment;
 import demo.copy.baisi.fragment.MineFragment;
 import demo.copy.baisi.fragment.PictureFragment;
@@ -46,23 +47,23 @@ public class MainActivity extends FragmentActivity {
 	@ViewInject(R.id.rbtn_mine)
 	private RadioButton rbtnMine;
 
-	//Fragment¼¯ºÏ
+	//Fragmentï¿½ï¿½ï¿½ï¿½
 	private List<Fragment> fragments = new ArrayList<Fragment>();
-	//ViewPagerÊÊÅäÆ÷
+	//ViewPagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	private MainPagerAdapter pagerAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
-		/////////////
-		//ÉèÖÃAdapter
+		BaisiApplication.getApplication().addActivity(this);
+		//ï¿½ï¿½ï¿½ï¿½Adapter
 		setAdapter();
-		//ÉèÖÃListener
+		//ï¿½ï¿½ï¿½ï¿½Listener
 		setListener();
 	}
 	/**
-	 * ¸øviewpagerÅäÖÃÊÊÅäÆ÷
+	 * ï¿½ï¿½viewpagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void setAdapter() {
 		fragments = new ArrayList<Fragment>();
@@ -72,17 +73,17 @@ public class MainActivity extends FragmentActivity {
 		fragments.add(new RadioFragment());
 		fragments.add(new SearchFragment());
 		fragments.add(new MineFragment());
-		//¹¹½¨Adapter
+		//ï¿½ï¿½ï¿½ï¿½Adapter
 		pagerAdapter = new MainPagerAdapter(getSupportFragmentManager(), fragments);
 		vpContent.setAdapter(pagerAdapter);
 		vpContent.setOffscreenPageLimit(3);
 	}
 	/**
-	 * ÉèÖÃ¼àÌıÆ÷
+	 * ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½
 	 */
 	private void setListener() {
 
-		//radioButton¼àÌıÆ÷
+		//radioButtonï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		rgBottomButtons.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
@@ -112,7 +113,7 @@ public class MainActivity extends FragmentActivity {
 			}
 		});
 
-		//viewpager¼àÌıÆ÷
+		//viewpagerï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		vpContent.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
@@ -145,6 +146,11 @@ public class MainActivity extends FragmentActivity {
 			public void onPageScrollStateChanged(int arg0) {
 			}
 		});
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 
 

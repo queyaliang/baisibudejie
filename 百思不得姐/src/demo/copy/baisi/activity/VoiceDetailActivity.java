@@ -26,6 +26,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import demo.copy.baisi.R;
+import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Voice;
 import demo.copy.baisi.service.VoicePlayerService;
 import demo.copy.baisi.service.VoicePlayerService.VoiceBinder;
@@ -63,6 +64,7 @@ public class VoiceDetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_voice_detail);
+		BaisiApplication.getApplication().addActivity(this);
 		int a = 0;
 		Intent intent = getIntent();
 		voice = (Voice) intent.getSerializableExtra("voice");
@@ -175,6 +177,11 @@ public class VoiceDetailActivity extends Activity {
 			}
 		});
 		x.image().bind(civProfileImage, voice.getProfile_image());
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 
 }

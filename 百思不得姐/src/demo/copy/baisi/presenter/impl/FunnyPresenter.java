@@ -26,7 +26,7 @@ public class FunnyPresenter implements IFunnyPresenter{
 			@Override
 			public void onSuccess(Object obj) {
 				// TODO Auto-generated method stub
-				List<Funny>funnys=(List<Funny>)obj;
+				List<Funny> funnys=(List<Funny>)obj;
 				funnyView.updateFunnyList(funnys);
 			}
 			

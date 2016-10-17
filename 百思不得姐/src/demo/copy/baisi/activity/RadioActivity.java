@@ -1,6 +1,7 @@
 package demo.copy.baisi.activity;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.util.MediaController;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +24,7 @@ public class RadioActivity extends Activity implements OnPreparedListener{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_radio);
-		
+		BaisiApplication.getApplication().addActivity(this);
 		Intent intent = getIntent();
 		String url = intent.getStringExtra("_url");
 		palyRadio(url);
@@ -57,5 +58,10 @@ public class RadioActivity extends Activity implements OnPreparedListener{
 	@Override
 	public void onPrepared(MediaPlayer mp) {
 		mVideoView.start();
+	}
+	@Override
+	protected void onDestroy() {
+		BaisiApplication.getApplication().removeActivity(this);
+		super.onDestroy();
 	}
 }
