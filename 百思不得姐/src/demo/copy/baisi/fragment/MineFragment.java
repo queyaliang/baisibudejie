@@ -15,6 +15,7 @@ import org.xutils.x;
 import org.xutils.view.annotation.ViewInject;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.SettingActivity;
 import demo.copy.baisi.activity.LoginActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Avatar;
@@ -55,6 +56,8 @@ public class MineFragment extends Fragment implements IMineView{
 	private TextView tvExit;
 	@ViewInject(R.id.tv_recommend)
 	private TextView tvRecommend;
+	@ViewInject(R.id.tv_setting)
+	private TextView tvSetting;
 
 	private IMinePresenter presenter;
 //	private String name;
@@ -85,6 +88,7 @@ public class MineFragment extends Fragment implements IMineView{
 		ivPhoto.setOnClickListener(listener);
 		tvExit.setOnClickListener(listener);
 		tvRecommend.setOnClickListener(listener);
+		tvSetting.setOnClickListener(listener);
 	}
 
 	/**
@@ -115,7 +119,11 @@ public class MineFragment extends Fragment implements IMineView{
 					OffersManager.getInstance(getActivity()).showOffersWall();
 
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
+			case R.id.tv_setting:
+				Intent intent = new Intent(getActivity(), SettingActivity.class);
+				startActivity(intent);
 			}
 		}
 	}

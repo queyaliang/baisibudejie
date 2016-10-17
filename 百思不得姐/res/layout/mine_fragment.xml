@@ -177,7 +177,7 @@
                 android:src="@drawable/setting" />
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/tv_setting"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentTop="true"
@@ -190,7 +190,7 @@
                 android:id="@+id/textView43"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_below="@id/textView42"
+                android:layout_below="@id/tv_setting"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginRight="10dp"
                 android:layout_toEndOf="@+id/imageView41"

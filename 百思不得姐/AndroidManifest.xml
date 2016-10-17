@@ -16,7 +16,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 挂载SDCARD -->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    
 
     <application
         android:name="demo.copy.baisi.app.BaisiApplication"
@@ -43,19 +42,27 @@
             android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
-        <activity android:name="demo.copy.baisi.activity.VoiceDetailActivity"></activity>
-        <activity android:name="demo.copy.baisi.activity.WebViewActivity"></activity>
-        <activity android:name="demo.copy.baisi.activity.LoginActivity"></activity>
-        <activity android:name="demo.copy.baisi.activity.RegistActivity"></activity>
-        <activity android:name="demo.copy.baisi.activity.ImageActivity"></activity>
-        <service android:name="demo.copy.baisi.service.VoicePlayerService"></service>
-        
-                 <!-- youmi -->
-                <activity
+        <activity android:name="demo.copy.baisi.activity.VoiceDetailActivity" >
+        </activity>
+        <activity android:name="demo.copy.baisi.activity.WebViewActivity" >
+        </activity>
+        <activity android:name="demo.copy.baisi.activity.LoginActivity" >
+        </activity>
+        <activity android:name="demo.copy.baisi.activity.RegistActivity" >
+        </activity>
+        <activity android:name="demo.copy.baisi.activity.ImageActivity" >
+        </activity>
+
+        <service android:name="demo.copy.baisi.service.VoicePlayerService" >
+        </service>
+
+        <!-- youmi -->
+        <activity
             android:name="net.youmi.android.AdBrowser"
             android:configChanges="keyboard|keyboardHidden|orientation"
             android:theme="@android:style/Theme.NoTitleBar" >
         </activity>
+
         <service
             android:name="net.youmi.android.AdService"
             android:exported="false" >
@@ -87,7 +94,11 @@
             android:name="net.youmi.android.SmartBannerService"
             android:exported="false" >
         </service>
-        
+
+        <activity
+            android:name="demo.copy.baisi.SettingActivity"
+            android:label="@string/title_activity_setting" >
+        </activity>
     </application>
 
 </manifest>
