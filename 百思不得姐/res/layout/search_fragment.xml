@@ -14,16 +14,12 @@
         android:textColor="#ffffff"
         android:textSize="16sp" />
 
-    <ScrollView
-        android:id="@+id/sc_content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="3dp" >
 
         <LinearLayout
             android:id="@+id/ll_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="3dp" 
             android:orientation="vertical" >
 
             <LinearLayout
@@ -63,14 +59,14 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
-            <ListView
+            <demo.copy.baisi.defineview.XListView
                 android:id="@+id/lv_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp" >
-            </ListView>
+                android:layout_marginRight="3dp" />
+           
         </LinearLayout>
-    </ScrollView>
+    
 
 </LinearLayout>

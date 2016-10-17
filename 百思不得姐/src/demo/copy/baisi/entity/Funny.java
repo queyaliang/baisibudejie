@@ -2,7 +2,7 @@ package demo.copy.baisi.entity;
 
 import java.io.Serializable;
 
-public class Funny implements Serializable{
+public class Funny   implements Serializable,AllFather{
 	private String text;
 	private int hate;
 	private String weixin_url;

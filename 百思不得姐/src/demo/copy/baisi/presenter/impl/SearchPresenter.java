@@ -2,6 +2,7 @@ package demo.copy.baisi.presenter.impl;
 
 import java.util.List;
 
+import demo.copy.baisi.entity.AllFather;
 import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.entity.Picture;
 import demo.copy.baisi.entity.Radio;
@@ -26,7 +27,7 @@ public class SearchPresenter implements ISearchPresenter{
 		model.loadSearchInfo(content, page, new ISearchModelCallBack() {
 			
 			@Override
-			public void loadPicture(List<Object> objects) {
+			public void loadPicture(List<AllFather> objects) {
 				
 				view.getSearchContent(objects);
 				

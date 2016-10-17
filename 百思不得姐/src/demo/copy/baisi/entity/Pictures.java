@@ -2,7 +2,7 @@ package demo.copy.baisi.entity;
 
 import java.io.Serializable;
 
-public class Pictures implements Serializable {
+public class Pictures  implements Serializable ,AllFather{
 
 	private int id;
 	private int love;

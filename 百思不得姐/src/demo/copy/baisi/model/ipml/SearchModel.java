@@ -13,6 +13,7 @@ import android.util.Log;
 import com.android.volley.RequestQueue;
 
 import demo.copy.baisi.app.BaisiApplication;
+import demo.copy.baisi.entity.AllFather;
 import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.entity.Picture;
 import demo.copy.baisi.entity.Radio;
@@ -30,16 +31,16 @@ public class SearchModel implements ISearchModel{
 
 	@Override
 	public void loadSearchInfo(final String search,final int page, final ISearchModelCallBack callback) {
-		AsyncTask<String, String, List<Object>> task = new AsyncTask<String, String, List<Object>>(){
+		AsyncTask<String, String, List<AllFather>> task = new AsyncTask<String, String, List<AllFather>>(){
 			@Override
-			protected List<Object> doInBackground(String... params) {
+			protected List<AllFather> doInBackground(String... params) {
 				try {
 					String url = UrlFactory.getSearchContent(search, page);
 					InputStream input =HttpUtils.getInputStream(url);
 					String json = HttpUtils.isToString(input);
 					JSONObject obj = new JSONObject(json);
 					if (obj.getInt("showapi_res_code")==Consts.RESPONSE_BACK_CODE) {
-						List<Object> objects = new ArrayList<Object>();
+						List<AllFather> objects = new ArrayList<AllFather>();
 						Log.i("demo", "获取搜索数据内容---》"+json);
 						JSONArray array = obj.getJSONObject("showapi_res_body").getJSONObject("pagebean").getJSONArray("contentlist");
 						objects = JsonParse.loadSearch(array);
@@ -51,7 +52,7 @@ public class SearchModel implements ISearchModel{
 				return null;
 			}
 			@Override
-			protected void onPostExecute(List<Object> result) {
+			protected void onPostExecute(List<AllFather> result) {
 				if (result==null) {
 					Log.i("demo", "result-->获取数据为空");
 					return;

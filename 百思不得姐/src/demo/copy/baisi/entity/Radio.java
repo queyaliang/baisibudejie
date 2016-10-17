@@ -1,6 +1,6 @@
 package demo.copy.baisi.entity;
 
-public class Radio {
+public class Radio implements AllFather{
 
 	private String text ;
 	private String hate;
@@ -10,7 +10,7 @@ public class Radio {
 	private String profile_image;
 	private String width;
 	private String voiceuri;
-	private String type;
+	private int type;
 	private String id;
 	private String love;
 	private String height;
@@ -21,7 +21,7 @@ public class Radio {
 	
 	public Radio(String text, String hate, String videotime, String voicetime,
 			String weixin_url, String profile_image, String width,
-			String voiceuri, String type, String id, String love,
+			String voiceuri, int type, String id, String love,
 			String height, String video_uri, String voicelength, String name,
 			String create_time) {
 		super();
@@ -111,11 +111,11 @@ public class Radio {
 		this.voiceuri = voiceuri;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

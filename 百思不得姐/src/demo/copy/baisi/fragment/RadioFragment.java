@@ -37,6 +37,7 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 		View view = inflater.inflate(R.layout.radio_fragment, null);
 		x.view().inject(this, view);
 		lvContent.setPullLoadEnable(true);// ��������������FALSEΪ�����������㲻���ظ�����
+		mHandler = new Handler();
 		presenter = new RadioPresenter(this);
 		presenter.getRadio(page);
 		setListener();
@@ -45,7 +46,6 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 
 	private void setListener() {
 		lvContent.setXListViewListener(this);
-		mHandler = new Handler();
 	}
 	
 	private void getData(){

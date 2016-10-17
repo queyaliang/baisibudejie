@@ -2,7 +2,7 @@ package demo.copy.baisi.entity;
 
 import java.io.Serializable;
 
-public class Voice implements Serializable{
+public class Voice  implements Serializable,AllFather{
 	private String text;
 	private int hate;
 	private int videotime;
