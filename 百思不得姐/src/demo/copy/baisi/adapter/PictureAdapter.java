@@ -128,61 +128,8 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 		holder.webView.setVerticalScrollBarEnabled(false); //垂直不显示 
 		holder.webView.setBackgroundColor(Color.BLACK);
 		
-//		holder.webView.loadUrl(BaisiApplication.getApplication().getCacheDir()+"/a005.jpg");
-//		WebSettings webSettings = holder.webView.getSettings();
-//		
-////		settings.setJavaScriptCanOpenWindowsAutomatically(true);
-//		webSettings.setJavaScriptEnabled(true);//璁剧疆鏀寔Js,蹇呴』璁剧疆鐨�涓嶇劧缃戦〉鍩烘湰涓婁笉鑳界湅
-//////		settings.setDisplayZoomControls(true);// 璁剧疆鏄剧ず缂╂斁鎸夐挳
-//		webSettings.setSupportZoom(true);  // 鏀寔缂╂斁
-//		webSettings.setBuiltInZoomControls(true);  // 璁剧疆鏄惁鍏佽webview浣跨敤缂╂斁鐨勫姛鑳�鎴戣繖閲岃涓篺alse,涓嶅厑璁�	
-//		webSettings.setUseWideViewPort(true);  //璁剧疆涓轰娇鐢╳ebview鎺ㄨ崘鐨勭獥鍙�
-////		webSettings.setLoadWithOverviewMode(true);//璁剧疆缃戦〉鑷�搴斿睆骞曞ぇ灏�
-//////		settings.setDefaultZoom(ZoomDensity.FAR); 
-//		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);//适应内容大小
-////		webSettings.setRenderPriority(RenderPriority.HIGH); //鎻愰珮缃戦〉娓叉煋鐨勪紭鍏堢骇 		
-//
-//		
-//		
-////		webSettings.setUseWideViewPort(true);
-//		webSettings.setLoadWithOverviewMode(true);
-//		
-//		  
-////		webSettings.setBuiltInZoomControls(true); // 设置显示缩放按钮  
-//		webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-//		webSettings.setDatabasePath(file.getAbsolutePath());
-//		webSettings.setAppCachePath(file.getAbsolutePath());
-//		webSettings.setDomStorageEnabled(true);
-//		webSettings.setDatabaseEnabled(true);
-//		webSettings.setAppCacheEnabled(true);
-//		
-//		
-//		
-////		webSettings.setSupportZoom(true); // 支持缩放  
-////		  
-////		  
-////		  
-////		webSettings.setLoadWithOverviewMode(true);  
-//		  
-////		DisplayMetrics metrics = new DisplayMetrics();  
-////		  ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(metrics);  
-////		  int mDensity = metrics.densityDpi;  
-////		  Log.d("maomao", "densityDpi = " + mDensity);  
-////		  if (mDensity == 240) {   
-////		   webSettings.setDefaultZoom(ZoomDensity.FAR);  
-////		  } else if (mDensity == 160) {  
-////		     webSettings.setDefaultZoom(ZoomDensity.MEDIUM);  
-////		  } else if(mDensity == 120) {  
-////		   webSettings.setDefaultZoom(ZoomDensity.CLOSE);  
-////		  }else if(mDensity == DisplayMetrics.DENSITY_XHIGH){  
-////		   webSettings.setDefaultZoom(ZoomDensity.FAR);   
-////		  }else if (mDensity == DisplayMetrics.DENSITY_TV){  
-////		   webSettings.setDefaultZoom(ZoomDensity.FAR);   
-////		  }else{  
-////		      webSettings.setDefaultZoom(ZoomDensity.MEDIUM);  
-////		  } 
-//		
-		
+		WebSettings webSettings = holder.webView.getSettings();
+
 		
 		String url = null;
 		if (path0 != null) {
@@ -198,14 +145,8 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 			Log.i("de", "url-->3-->" + path3);
 			url = path3;
 		}
-//		holder.webView.loadUrl(url);		
-//		holder.webView.setTag("webview" + position);
-		//holder.webView.setOnClickListener(new WebClickListener(position, url));
-		presenter.getGifOrImageUrl(url);
+		holder.webView.loadUrl(url);		
 		holder.layout.setOnClickListener(new InteOnClickeListeners(position, url));
-
-
-
 		return convertView;
 	}
 
@@ -249,22 +190,4 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 		
 	}
 
-	//	class WebClickListener implements OnClickListener {
-	//		private int position;
-	//		private String url;
-	//
-	//		public WebClickListener(int position, String url) {
-	//			this.position = position;
-	//			this.url = url;
-	//		}
-	//
-	//		@Override
-	//		public void onClick(View v) {			
-	//			WebView webview = (WebView) listview.findViewWithTag("webview"
-	//					+ position);
-	//			Intent intent = new Intent(context, WebViewActivity.class);
-	//			intent.putExtra("_url", url);
-	//			context.startActivity(intent);
-	//		}
-	//	}	
 }
