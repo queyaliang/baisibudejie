@@ -36,7 +36,7 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 			Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.radio_fragment, null);
 		x.view().inject(this, view);
-		lvContent.setPullLoadEnable(true);// ÉèÖÃÈÃËüÉÏÀ­£¬FALSEÎª²»ÈÃÉÏÀ­£¬±ã²»¼ÓÔØ¸ü¶àÊı¾İ
+		lvContent.setPullLoadEnable(true);// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½FALSEÎªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã²»ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
 		presenter = new RadioPresenter(this);
 		presenter.getRadio(page);
 		setListener();
@@ -60,20 +60,20 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 		onLoad();
 		
 	}
-	/** Í£Ö¹Ë¢ĞÂ£¬ */
+	/** Í£Ö¹Ë¢ï¿½Â£ï¿½ */
 	private void onLoad() {
 		Log.i("demo", "onload()-->page="+page);
 		lvContent.stopRefresh();
 		lvContent.stopLoadMore();
-		lvContent.setRefreshTime("¸Õ¸Õ");
+		lvContent.setRefreshTime("åˆšåˆš");
 	}
-	// Ë¢ĞÂ
+	// Ë¢ï¿½ï¿½
 	@Override
 	public void onRefresh() {
 		Log.i("demo", "onRefresh-->page="+page);
 		if (page==1) {
 			lvContent.setStopFrash(false);
-			Toast.makeText(getActivity(), "ÒÑ¾­ÎªµÚÒ»Ò³", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "å·²ç»ä¸ºç¬¬ä¸€é¡µ", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		page--;
@@ -85,13 +85,13 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 			}
 		}, 20000);
 	}
-	// ¼ÓÔØ
+	// ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public void onLoadMore() {
 		Log.i("demo", "loadMore-->page="+page);
 		if (page==20) {
 			lvContent.setStopLoading(false);
-			Toast.makeText(getActivity(), "ÒÑ¾­È«²¿¼ÓÔØÍê³É", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "å·²ç»ä¸ºæœ€åä¸€é¡µ", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		page++;
