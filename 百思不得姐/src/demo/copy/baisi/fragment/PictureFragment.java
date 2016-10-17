@@ -105,7 +105,7 @@ public class PictureFragment extends Fragment implements IPictureView,
 		Log.i("demo", "onload()-->page=" + page);
 		listView.stopRefresh();
 		listView.stopLoadMore();
-		listView.setRefreshTime("�ո�");
+		listView.setRefreshTime("刚刚");
 	}
 
 	@Override

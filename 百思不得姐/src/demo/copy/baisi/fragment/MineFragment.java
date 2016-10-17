@@ -105,6 +105,7 @@ public class MineFragment extends Fragment implements IMineView{
 				break;
 			case R.id.tv_exit:
 				BaisiApplication.getApplication().exit();
+				break;
 			case R.id.tv_recommend:
 				// 调有米的sdk
 				try {
@@ -121,9 +122,11 @@ public class MineFragment extends Fragment implements IMineView{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				break;
 			case R.id.tv_setting:
 				Intent intent = new Intent(getActivity(), SettingActivity.class);
 				startActivity(intent);
+				break;
 			}
 		}
 	}
