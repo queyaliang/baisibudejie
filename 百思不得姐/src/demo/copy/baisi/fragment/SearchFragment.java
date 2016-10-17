@@ -58,6 +58,8 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 
 	private void setListener() {
 		
+		lvContent.setXListViewListener(this);
+		
 		tvSearch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -70,7 +72,7 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 	@Override
 	public void getSearchContent(List<AllFather> objects) {
 		Log.d("demo", "searchfragment-->objects.size():"+objects.size());
-		lvContent.setAdapter(new SearchAdapter(objects, getActivity()));
+		lvContent.setAdapter(new SearchAdapter(objects, getActivity(),lvContent));
 		onLoad();
 	}
 	

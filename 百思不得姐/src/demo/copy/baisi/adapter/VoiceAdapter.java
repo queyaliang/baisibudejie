@@ -61,7 +61,9 @@ public class VoiceAdapter extends BaseAdapter{
 			
 			convertView.setTag(holder);
 		}
+		else{
 		holder = (ViewHolder) convertView.getTag();
+		}
 		Voice voice = getItem(position);
 		holder.tvName.setText(voice.getName());
 		holder.tvPublishTime.setText(voice.getCreate_time());
