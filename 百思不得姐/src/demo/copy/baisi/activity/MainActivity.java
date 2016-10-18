@@ -18,8 +18,11 @@ import demo.copy.baisi.fragment.PictureFragment;
 import demo.copy.baisi.fragment.RadioFragment;
 import demo.copy.baisi.fragment.SearchFragment;
 import demo.copy.baisi.fragment.VoiceFragment;
+import demo.copy.baisi.ui.Consts;
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -52,19 +55,30 @@ public class MainActivity extends FragmentActivity {
 	private List<Fragment> fragments = new ArrayList<Fragment>();
 	//ViewPager������
 	private MainPagerAdapter pagerAdapter;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
 		
+
 		Wj wj=new Wj();
 		wj.showWj();
-		BaisiApplication.getApplication().addActivity(this);
+
 		//����Adapter
 		setAdapter();
 		//����Listener
 		setListener();
+	}
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (getSharedPreferences("textsize", Context.MODE_PRIVATE)!=null) {
+			SharedPreferences share = getSharedPreferences("textsize", Context.MODE_PRIVATE);
+			Consts.textSize = share.getInt("size", 15);
+		}
 	}
 	/**
 	 * ��viewpager����������

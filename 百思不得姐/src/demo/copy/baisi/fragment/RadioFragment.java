@@ -31,16 +31,24 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 
 	private Handler mHandler;
 
+	private RadioAdapter adapter;
+
+	private View view;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.radio_fragment, null);
+		if(view==null){
+		view = inflater.inflate(R.layout.radio_fragment, null);
 		x.view().inject(this, view);
 		lvContent.setPullLoadEnable(true);
 		mHandler = new Handler();
 		presenter = new RadioPresenter(this);
 		presenter.getRadio(page);
 		setListener();
+		}else{
+			((ViewGroup) view.getParent()).removeView(view);
+		}
 		return view;
 	}
 
@@ -55,7 +63,7 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 	@Override
 	public void getRadio(List<Radio> radios) {
 		Log.i("demo", "getRadio()-->page="+page);
-		RadioAdapter adapter = new RadioAdapter(getActivity(), radios,lvContent);
+		adapter = new RadioAdapter(getActivity(), radios,lvContent);
 		lvContent.setAdapter(adapter);
 		onLoad();
 		
@@ -103,5 +111,12 @@ public class RadioFragment extends Fragment implements IRadioView,IXListViewList
 				getData();
 			}
 		}, 2000);
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (adapter!=null) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 }

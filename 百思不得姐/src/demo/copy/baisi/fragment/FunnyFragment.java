@@ -27,45 +27,49 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class FunnyFragment extends Fragment implements IFunnyView,IXListViewListener{
-@ViewInject(R.id.tv_app_header)
-private TextView tvHeader;
-@ViewInject(R.id.lv_funny_fragment)
-private XListView listView;	
-private IFunnyPresenter funnyPresenter;
-//private List<Funny> funnies;
-private FunnyListAdapter funnyAdapter;
-private int page=1;
-private Handler mHandler;
+	@ViewInject(R.id.tv_app_header)
+	private TextView tvHeader;
+	@ViewInject(R.id.lv_funny_fragment)
+	private XListView listView;	
+	private IFunnyPresenter funnyPresenter;
+	//private List<Funny> funnies;
+	private FunnyListAdapter funnyAdapter;
+	private int page=1;
+	private Handler mHandler;
+	private View view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.funny_fragment, null);
+		if(view==null){
+		view = inflater.inflate(R.layout.funny_fragment, null);
 		x.view().inject(this, view);
 		funnyPresenter=new FunnyPresenter(this,page);
 		funnyPresenter.loadFunny(page);
 		listView.setPullLoadEnable(true);// 璁剧疆璁╁畠涓婃媺锛孎ALSE涓轰笉璁╀笂鎷夛紝渚夸笉鍔犺浇鏇村鏁版嵁
-		
 		setHeaderName();
 		setListeners();
+		}else{
+			((ViewGroup) view.getParent()).removeView(view);
+		}
 		return view;
 	}
 	private void setListeners() {
 		listView.setXListViewListener(this);
 		mHandler = new Handler();
-		
+
 	}
 	/**
 	 * 锟斤拷锟斤拷抬头锟斤拷锟�
 	 */
 	private void setHeaderName() {
 		tvHeader.setText("段子");
-		
+
 	}
 	@Override
 	public void updateFunnyList(List<Funny> funnys) {
 		Log.i("aaaa", ""+funnys.toString());
-//		this.funnies=funnys;
+		//		this.funnies=funnys;
 		funnyAdapter=new FunnyListAdapter(getActivity(),funnys);
 		listView.setAdapter(funnyAdapter);
 		onLoad();
@@ -88,7 +92,7 @@ private Handler mHandler;
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				
+
 				getData();
 			}
 		}, 2000);
@@ -106,7 +110,7 @@ private Handler mHandler;
 
 			@Override
 			public void run() {
-				
+
 				getData();
 			}
 		}, 2000);
@@ -114,5 +118,12 @@ private Handler mHandler;
 	private void getData(){
 		funnyPresenter.loadFunny(page);
 	}
-	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (funnyAdapter!=null) {
+			funnyAdapter.notifyDataSetChanged();
+		}
+	}
+
 }
