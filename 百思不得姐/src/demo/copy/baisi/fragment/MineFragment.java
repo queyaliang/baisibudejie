@@ -16,6 +16,7 @@ import org.xutils.view.annotation.ViewInject;
 
 import demo.copy.baisi.R;
 import demo.copy.baisi.activity.LoginActivity;
+import demo.copy.baisi.activity.MapActivity;
 import demo.copy.baisi.activity.SettingActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Avatar;
@@ -37,6 +38,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -58,6 +60,8 @@ public class MineFragment extends Fragment implements IMineView{
 	private TextView tvRecommend;
 	@ViewInject(R.id.tv_setting)
 	private TextView tvSetting;
+	@ViewInject(R.id.tv_location)
+	private TextView tvLocation;
 
 	private IMinePresenter presenter;
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
@@ -78,11 +82,19 @@ public class MineFragment extends Fragment implements IMineView{
 	}
 
 	private void setListener() {
+		
+		
 		MineListener listener = new MineListener();
 		ivPhoto.setOnClickListener(listener);
 		tvExit.setOnClickListener(listener);
 		tvRecommend.setOnClickListener(listener);
 		tvSetting.setOnClickListener(listener);
+		
+		tvLocation.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				startActivity(new Intent(getActivity(),MapActivity.class));
+			}
+		});
 	}
 
 	/**

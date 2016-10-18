@@ -7,6 +7,7 @@ import org.xutils.x;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.baidu.mapapi.SDKInitializer;
 
 import demo.copy.baisi.entity.ImageResources;
 import demo.copy.baisi.entity.User;
@@ -57,6 +58,8 @@ public class BaisiApplication extends Application{
 	public void onCreate() {
 		super.onCreate();
 		x.Ext.init(this);
+		//≥ı ºªØµÿÕº
+		SDKInitializer.initialize(this);
 		app = this;
 		mqueue = Volley.newRequestQueue(this);
 		images=ImageResources.getImage();
