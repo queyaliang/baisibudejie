@@ -52,7 +52,7 @@ public class BaisiApplication extends Application{
 	public void setCurrentTextSize(int currentTextSize) {
 		this.currentTextSize = currentTextSize;
 	}
-	SharedPreferences share = getApplicationContext().getSharedPreferences("textsize", Context.MODE_PRIVATE);
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -60,7 +60,6 @@ public class BaisiApplication extends Application{
 		app = this;
 		mqueue = Volley.newRequestQueue(this);
 		images=ImageResources.getImage();
-		Consts.textSize=share.getInt("size", 15);
 	}
 	
 	

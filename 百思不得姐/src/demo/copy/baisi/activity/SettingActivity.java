@@ -41,6 +41,16 @@ public class SettingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_setting);
 		x.view().inject(this);
+		final SharedPreferences pref = getSharedPreferences("textsize", Context.MODE_PRIVATE);
+		
+		int size = pref.getInt("size", 15);
+		if (size==12) {
+			rbtnXiao.setChecked(true);
+		}else if (size==15) {
+			rbtnZhong.setChecked(true);
+		}else {
+			rbtnDa.setChecked(true);
+		}
 		tvabout.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -58,26 +68,13 @@ public class SettingActivity extends Activity {
 			}
 		});
 
-
-		int textSize = app.getCurrentTextSize();
-
-		if (textSize==0) {
-			rbtnXiao.setChecked(true);
-		}
-		if (textSize==1) {
-			rbtnZhong.setChecked(true);
-		}
-		if (textSize==2) {
-			rbtnDa.setChecked(true);
-		}
-
 		//判断sharepreference中是否存有cart信息  有的话则一起发送数据
-		SharedPreferences pref = getSharedPreferences("textsize", Context.MODE_PRIVATE);
-		final Editor edit = pref.edit();
+		
 		radioGroup=(RadioGroup) findViewById(R.id.radiogroup);
 		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				Editor edit = pref.edit();
 				if(checkedId==R.id.rbtn_xiao){
 					edit.putInt("size", 12);
 				}
@@ -88,9 +85,10 @@ public class SettingActivity extends Activity {
 					edit.putInt("size", 18);
 					
 				}
+				edit.commit();
 			}
 		});
-		edit.commit();
+		
 	}
 
 	@Override

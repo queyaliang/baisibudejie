@@ -31,7 +31,7 @@ import demo.copy.baisi.presenter.impl.PicturePresenter;
 import demo.copy.baisi.view.IPictureView;
 
 public class PictureFragment extends Fragment implements IPictureView,
-		IXListViewListener {
+IXListViewListener {
 
 	@ViewInject(R.id.tv_app_header)
 	private TextView tvHeader;
@@ -49,11 +49,12 @@ public class PictureFragment extends Fragment implements IPictureView,
 	private IPicturepresenter picturePresenter;
 	private Handler mHandler;
 
-	
+
 	@ViewInject(R.id.webView)
 	private WebView webview;
-	
-	
+	private View view;
+
+
 	public PictureFragment() {
 		picturePresenter = new PicturePresenter(this, page);
 	}
@@ -61,14 +62,16 @@ public class PictureFragment extends Fragment implements IPictureView,
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.picture_fragment, null);
-		x.view().inject(this, view);
-		listView.setPullLoadEnable(true);
-		picturePresenter.loadPicture(page);
-		// ����̧ͷ���
-		setHeaderName();
-		// ������
-		setLisenners();
+		if(view==null){
+			view = inflater.inflate(R.layout.picture_fragment, null);
+			x.view().inject(this, view);
+			listView.setPullLoadEnable(true);
+			picturePresenter.loadPicture(page);
+			setHeaderName();
+			setLisenners();
+		}else{
+			((ViewGroup) view.getParent()).removeView(view);
+		}
 		return view;
 	}
 
@@ -134,7 +137,7 @@ public class PictureFragment extends Fragment implements IPictureView,
 		if (page == 20) {
 			listView.setStopLoading(false);
 			Toast.makeText(getActivity(), "已经全部加载完成", Toast.LENGTH_SHORT)
-					.show();
+			.show();
 			return;
 		}
 		page++;
@@ -144,5 +147,13 @@ public class PictureFragment extends Fragment implements IPictureView,
 				getData();
 			}
 		}, 2000);
+	}
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (adapter!=null) {
+
+			adapter.notifyDataSetChanged();
+		}
 	}
 }

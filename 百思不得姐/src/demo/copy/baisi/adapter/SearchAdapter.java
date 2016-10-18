@@ -18,6 +18,7 @@ import demo.copy.baisi.entity.Radio;
 import demo.copy.baisi.entity.Voice;
 import demo.copy.baisi.presenter.impl.RadioImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
+import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
 import demo.copy.baisi.view.IRadioImageView;
 
@@ -106,7 +107,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 		int type = getItemViewType(position);
 		PictureViewholder pHolder = null;
 		FunnyViewHolder fHolder = null;
-		VoiceViewHolder vHolder = null;
+		VoiceViewHolder vHolder= null;
 		RadioViewHolder rHolder = null;
 		if (convertView==null) {
 			switch (type) {
@@ -185,8 +186,10 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			pHolder.tvUserName.setText(picture.getName()); 		
 			pHolder.tvTime.setText(picture.getCreate_time()); 
 			pHolder.tvZan.setText(picture.getLove() + ""); 		
-			pHolder.tvTucao.setText(picture.getHate() + ""); 	
-			pHolder.tvTotal.setText(picture.getText()); 		
+			pHolder.tvTucao.setText(picture.getHate() + ""); 
+			String text1 = picture.getText().replace("\n", "").toString().trim();
+			pHolder.tvTotal.setText(text1); 	
+			pHolder.tvTotal.setTextSize(Consts.textSize);	
 			ImageListener listener = ImageLoader.getImageListener(pHolder.ivPic,
 					R.drawable.welcom_icon, R.drawable.welcom_icon);
 			imageLoader.get(picture.getProfile_image(), listener,
@@ -230,6 +233,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			String text=funny.getText();
 			String content = text.replace("\n", "");
 			fHolder.text.setText(content);
+			fHolder.text.setTextSize(Consts.textSize);
 			String fUrl =funny.getWeixin_url();
 			fHolder.url.setText(fUrl);
 			fHolder.url.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
@@ -245,6 +249,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			String vText = voice.getText().replace("\n", "").replace("\r", "").trim();
 			
 			vHolder.tvText.setText(vText);
+			vHolder.tvText.setTextSize(Consts.textSize);
 			ImageListener vListener = ImageLoader.getImageListener(vHolder.ivProfil_image, R.drawable.ic_launcher, R.drawable.ic_launcher);
 			imageLoader.get(voice.getProfile_image(),vListener);
 			break;
@@ -254,6 +259,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			rHolder.tvTime.setText(radio.getCreate_time());
 			String rText = radio.getText().replace("\n", "");
 			rHolder.tvText.setText(rText);
+			rHolder.tvText.setTextSize(Consts.textSize);
 			rHolder.tvZan.setText(radio.getLove()+"");
 			rHolder.tvRuo.setText(radio.getHate()+"");
 			ImageListener rListener = ImageLoader.getImageListener(rHolder.image, R.drawable.a010, R.drawable.a010);
@@ -275,8 +281,6 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			}
 			break;
 		}
-		
-		
 		return convertView;
 	}
 	

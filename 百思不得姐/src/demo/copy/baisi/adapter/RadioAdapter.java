@@ -74,12 +74,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		holder.tvText.setText(text);
 		holder.tvZan.setText(radio.getLove()+"");
 		holder.tvRuo.setText(radio.getHate()+"");
-<<<<<<< HEAD
-		holder.image.measure(34,34);
-		holder.tvText.setTextSize(Consts.textSize);
-=======
 //		holder.image.measure(34,34);
->>>>>>> branch 'master' of https://github.com/queyaliang/baisibudejie.git
 //		int width = holder.image.getMeasuredWidth();
 //		int height = holder.image.getMeasuredHeight();
 //		RotateAnimation anim = new RotateAnimation(0, 360,26, 26);

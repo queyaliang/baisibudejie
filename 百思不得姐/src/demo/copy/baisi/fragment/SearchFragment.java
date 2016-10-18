@@ -38,40 +38,55 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 	private XListView lvContent;
 	@ViewInject(R.id.ibtn_clear_content)
 	private ImageButton ibtnClear;
-	
-	
+
+
 	private SearchPresenter presenter;
-	
+
 	private int page = 1;
 	protected String content;
 	private Handler mHandler;
+	private SearchAdapter adapter;
+	private View view;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.search_fragment, null);
-		x.view().inject(this, view);
-		mHandler = new Handler();
-		lvContent.setPullLoadEnable(true);
-		presenter = new SearchPresenter(this);
-		
-		setListener();
+		if(view==null){
+			view = inflater.inflate(R.layout.search_fragment, null);
+			x.view().inject(this, view);
+			content = etSearch.getText().toString().trim();
+			mHandler = new Handler();
+			lvContent.setPullLoadEnable(true);
+			presenter = new SearchPresenter(this);
+
+			setListener();
+		}else{
+			((ViewGroup) view.getParent()).removeView(view);
+		}
 		return view;
+	}
+	@Override
+	public void onStart() {
+		Log.d("demo", "searchfragment-->onStart()1");
+		super.onStart();
+//		if (!"".equals(content)) {
+//			Log.d("demo", "searchfragment-->onStart()2");
+//			presenter.getSearchInfo(content, page);
+//		}
 	}
 
 	private void setListener() {
-		
+
 		lvContent.setXListViewListener(this);
-		
+
 		tvSearch.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				content = etSearch.getText().toString().trim();
 				presenter.getSearchInfo(content, page);
 			}
 		});
 		ibtnClear.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				etSearch.setText("");
@@ -81,18 +96,20 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 
 	@Override
 	public void getSearchContent(List<AllFather> objects) {
+		Log.d("demo", "searchfragment-->getSearchContent()");
 		Log.d("demo", "searchfragment-->objects.size():"+objects.size());
-		lvContent.setAdapter(new SearchAdapter(objects, getActivity(),lvContent));
+		adapter = new SearchAdapter(objects, getActivity(),lvContent);
+		lvContent.setAdapter(adapter);
 		onLoad();
 	}
-	
+
 	private void onLoad() {
 		Log.i("demo", "onload()-->page="+page);
 		lvContent.stopRefresh();
 		lvContent.stopLoadMore();
 		lvContent.setRefreshTime("刚刚");
 	}
-	
+
 	private void getData(){
 		presenter.getSearchInfo(content, page);
 	}
@@ -109,11 +126,11 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 		mHandler.postDelayed(new Runnable() {
 			@Override
 			public void run() {
-				
+
 				getData();
 			}
 		}, 20000);
-		
+
 	}
 
 	@Override
@@ -132,7 +149,14 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 				getData();
 			}
 		}, 2000);
-		
+
 	}
-	
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (adapter!=null) {
+			adapter.notifyDataSetChanged();
+		}
+	}
+
 }

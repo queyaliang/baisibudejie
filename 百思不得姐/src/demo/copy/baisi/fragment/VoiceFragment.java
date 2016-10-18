@@ -122,5 +122,12 @@ public class VoiceFragment extends Fragment implements IVoiceView,IXListViewList
 			listView.setAdapter(voiceAdapter);
 			onLoad();
 		}
+		@Override
+		public void onResume() {
+			super.onResume();
+			if (voiceAdapter!=null) {
+				voiceAdapter.notifyDataSetChanged();
+			}
+		}
 		
 }
