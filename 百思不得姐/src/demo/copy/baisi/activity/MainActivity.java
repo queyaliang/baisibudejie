@@ -9,6 +9,7 @@ import org.xutils.view.annotation.ViewInject;
 import demo.copy.baisi.R;
 import demo.copy.baisi.R.layout;
 import demo.copy.baisi.R.menu;
+import demo.copy.baisi.Wj;
 import demo.copy.baisi.adapter.MainPagerAdapter;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.fragment.FunnyFragment;
@@ -56,6 +57,9 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
+		
+		Wj wj=new Wj();
+		wj.showWj();
 		BaisiApplication.getApplication().addActivity(this);
 		//����Adapter
 		setAdapter();
