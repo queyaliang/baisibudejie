@@ -10,10 +10,13 @@ import com.android.volley.toolbox.Volley;
 
 import demo.copy.baisi.entity.ImageResources;
 import demo.copy.baisi.entity.User;
+import demo.copy.baisi.ui.Consts;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 
 public class BaisiApplication extends Application{
 	
@@ -23,6 +26,8 @@ public class BaisiApplication extends Application{
 	private User user;
 	private String token;
 	private List<Integer>images;
+	
+	private int currentTextSize = 1;
 	
 	private static List<Activity> activitys = new ArrayList<Activity>();
 	
@@ -41,6 +46,13 @@ public class BaisiApplication extends Application{
 	}
 	
 
+	public int getCurrentTextSize() {
+		return currentTextSize;
+	}
+	public void setCurrentTextSize(int currentTextSize) {
+		this.currentTextSize = currentTextSize;
+	}
+	SharedPreferences share = getApplicationContext().getSharedPreferences("textsize", Context.MODE_PRIVATE);
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -48,6 +60,7 @@ public class BaisiApplication extends Application{
 		app = this;
 		mqueue = Volley.newRequestQueue(this);
 		images=ImageResources.getImage();
+		Consts.textSize=share.getInt("size", 15);
 	}
 	
 	

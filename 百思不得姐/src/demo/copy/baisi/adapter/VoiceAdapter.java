@@ -10,6 +10,7 @@ import demo.copy.baisi.R;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Voice;
 import demo.copy.baisi.ui.CircleImageView;
+import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
 
 import android.content.Context;
@@ -65,9 +66,11 @@ public class VoiceAdapter extends BaseAdapter{
 		Voice voice = getItem(position);
 		holder.tvName.setText(voice.getName());
 		holder.tvPublishTime.setText(voice.getCreate_time());
+		holder.tvText.setTextSize(Consts.textSize);
 		String text = voice.getText().replace("\n", "").replace("\r", "").trim();
 		
 		holder.tvText.setText(text);
+		holder.tvText.setTextSize(Consts.textSize);
 		ImageListener listener = ImageLoader.getImageListener(holder.ivProfil_image, R.drawable.ic_launcher, R.drawable.ic_launcher);
 		imageLoader.get(voice.getProfile_image(),listener);
 		return convertView;

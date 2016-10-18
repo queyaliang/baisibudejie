@@ -15,8 +15,8 @@ import org.xutils.x;
 import org.xutils.view.annotation.ViewInject;
 
 import demo.copy.baisi.R;
-import demo.copy.baisi.SettingActivity;
 import demo.copy.baisi.activity.LoginActivity;
+import demo.copy.baisi.activity.SettingActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Avatar;
 import demo.copy.baisi.entity.User;
