@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingActivity"
+    android:orientation="vertical" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#E0E0E0"
+        android:paddingBottom="4dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="4dp"
+        android:text="审核标准是什么"
+        android:textSize="14sp" />
+
+    <TextView
+        
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="4dp"
+        android:paddingLeft="7dp"
+        android:paddingTop="4dp"
+        android:text="1、 百思不得姐是分享快乐的网站，请不要发表无关的内容欺骗小伙伴们的感情啦！
+2、 不能涉及政治、色情、暴力、陪聊等违法 违规内容，不能包含邮件地址、电话号码、 地址、QQ、微博等联系信息，不要在本 站发布广告。
+3、 请发布视频、声音、文字和图片，身边的 搞笑趣事、糗事、随手拍等都可以。
+4、 请选择清晰有趣的图片，并且不能包含其 他网站、微博号等的水印。请勿上传涉嫌 广告、营销的图片。
+5、 文字笑话或段子，请提供纯文字。
+6、 请勿上传聊天表情图片，虽然好笑，但是 不适合在不得姐出现哦。
+7、 请勿提交重复的内容。"
+        android:textSize="14sp" />
+
+</LinearLayout>

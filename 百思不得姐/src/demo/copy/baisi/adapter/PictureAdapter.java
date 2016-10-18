@@ -40,6 +40,7 @@ import demo.copy.baisi.defineview.MyWebView;
 import demo.copy.baisi.entity.Pictures;
 import demo.copy.baisi.presenter.impl.GifOrImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
+import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
 import demo.copy.baisi.view.IGifOrImageView;
 
@@ -112,6 +113,7 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 		holder.tvZan.setText(item.getLove() + ""); 		// 璧�
 		holder.tvTucao.setText(item.getHate() + ""); 	// 鎭�
 		holder.tvTotal.setText(item.getText()); 		// text
+		holder.tvTotal.setTextSize(Consts.textSize);
 		// 使锟斤拷ImageLoader锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟酵计�
 		// 头锟斤拷
 		ImageListener listener = ImageLoader.getImageListener(holder.ivPic,

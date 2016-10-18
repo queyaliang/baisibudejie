@@ -89,15 +89,17 @@
             android:name="net.youmi.android.SmartBannerActivity"
             android:configChanges="keyboard|keyboardHidden|orientation" >
         </activity>
+        <activity android:name="demo.copy.baisi.activity.AboutActivity" >
+        </activity>
+        <activity android:name="demo.copy.baisi.activity.HelpActivity" >
+        </activity>
 
         <service
             android:name="net.youmi.android.SmartBannerService"
             android:exported="false" >
         </service>
 
-        <activity
-            android:name="demo.copy.baisi.SettingActivity"
-            android:label="@string/title_activity_setting" >
+        <activity android:name="demo.copy.baisi.activity.SettingActivity" >
         </activity>
     </application>
 

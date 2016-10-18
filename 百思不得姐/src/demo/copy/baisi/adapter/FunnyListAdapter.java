@@ -27,6 +27,7 @@ import demo.copy.baisi.activity.WebViewActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.ui.CircleImageView;
+import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
 
 public class FunnyListAdapter extends BaseAdapter{
@@ -86,10 +87,12 @@ public class FunnyListAdapter extends BaseAdapter{
 		String text=funny.getText();
 		String content = text.replace("\n", "");
 		holder.text.setText(content);
+		holder.text.setTextSize(Consts.textSize);
 		String url =funny.getWeixin_url();
 		holder.url.setText(url);
 		holder.url.getPaint().setFlags(Paint. UNDERLINE_TEXT_FLAG );
 		holder.url.setTextColor(Color.BLUE);
+		holder.url.setTextSize(Consts.textSize);
 		Log.i("YYYYY", ""+funny.getProfile_image());
 //		x.image().bind(holder.cvuser,funny.getProfile_image());
 //		holder.image.measure(34, 34);

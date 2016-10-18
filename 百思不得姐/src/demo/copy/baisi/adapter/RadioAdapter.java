@@ -25,6 +25,7 @@ import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Radio;
 import demo.copy.baisi.presenter.impl.RadioImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
+import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
 import demo.copy.baisi.view.IRadioImageView;
 
@@ -73,7 +74,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		holder.tvText.setText(text);
 		holder.tvZan.setText(radio.getLove()+"");
 		holder.tvRuo.setText(radio.getHate()+"");
-//		holder.image.measure(34,34);
+
 //		int width = holder.image.getMeasuredWidth();
 //		int height = holder.image.getMeasuredHeight();
 //		RotateAnimation anim = new RotateAnimation(0, 360,26, 26);
