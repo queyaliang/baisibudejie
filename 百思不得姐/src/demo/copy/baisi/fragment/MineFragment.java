@@ -60,13 +60,7 @@ public class MineFragment extends Fragment implements IMineView{
 	private TextView tvSetting;
 
 	private IMinePresenter presenter;
-//	private String name;
-//
-///
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
-
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -142,7 +136,6 @@ public class MineFragment extends Fragment implements IMineView{
 		
 		if (myAvatar!=null) {
 			ivPhoto.setImageBitmap(myAvatar.getBitmap());
-			
 		}
 		
 

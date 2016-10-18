@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,8 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 	private EditText etSearch;
 	@ViewInject(R.id.lv_content)
 	private XListView lvContent;
+	@ViewInject(R.id.ibtn_clear_content)
+	private ImageButton ibtnClear;
 	
 	
 	private SearchPresenter presenter;
@@ -65,6 +68,13 @@ public class SearchFragment extends Fragment implements ISearchView,IXListViewLi
 			public void onClick(View v) {
 				content = etSearch.getText().toString().trim();
 				presenter.getSearchInfo(content, page);
+			}
+		});
+		ibtnClear.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				etSearch.setText("");
 			}
 		});
 	}
