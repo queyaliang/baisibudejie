@@ -60,13 +60,7 @@ public class MineFragment extends Fragment implements IMineView{
 	private TextView tvSetting;
 
 	private IMinePresenter presenter;
-//	private String name;
-//
-///
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
-
-
-
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -105,6 +99,7 @@ public class MineFragment extends Fragment implements IMineView{
 				break;
 			case R.id.tv_exit:
 				BaisiApplication.getApplication().exit();
+				break;
 			case R.id.tv_recommend:
 				// 调有米的sdk
 				try {
@@ -121,9 +116,11 @@ public class MineFragment extends Fragment implements IMineView{
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				break;
 			case R.id.tv_setting:
 				Intent intent = new Intent(getActivity(), SettingActivity.class);
 				startActivity(intent);
+				break;
 			}
 		}
 	}
@@ -139,7 +136,6 @@ public class MineFragment extends Fragment implements IMineView{
 		
 		if (myAvatar!=null) {
 			ivPhoto.setImageBitmap(myAvatar.getBitmap());
-			
 		}
 		
 

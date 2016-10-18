@@ -101,8 +101,9 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 			holder.tvZan = (TextView) convertView.findViewById(R.id.tvZan);
 			holder.layout = (RelativeLayout) convertView.findViewById(R.id.rlContent);
 			convertView.setTag(holder);
-		}
+		}else{
 		holder = (ViewHolder) convertView.getTag();
+		}
 		// 锟斤拷holder锟叫的控硷拷锟斤拷锟叫革拷值
 		Pictures item = getItem(position);
 		Log.i("YYYYY", "" + item.getProfile_image());

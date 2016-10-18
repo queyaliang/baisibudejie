@@ -1,31 +1,20 @@
 package demo.copy.baisi.adapter;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.List;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 
-import android.R.color;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.MediaMetadataRetriever;
-import android.media.ThumbnailUtils;
-import android.provider.MediaStore;
-import android.sax.StartElementListener;
-import android.text.GetChars;
 import android.util.Log;
 import android.view.View;
-import android.view.View.MeasureSpec;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -34,7 +23,6 @@ import demo.copy.baisi.R;
 import demo.copy.baisi.activity.RadioActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Radio;
-import demo.copy.baisi.presenter.IRadioPresenter;
 import demo.copy.baisi.presenter.impl.RadioImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
 import demo.copy.baisi.ui.Consts;
@@ -44,7 +32,6 @@ import demo.copy.baisi.view.IRadioImageView;
 public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 
 	private ImageLoader imageLoader;
-	private MediaMetadataRetriever media;
 	private RadioImagePresenter presenter;
 	private ListView view;
 	private RequestQueue mqueue;
@@ -55,7 +42,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		super(context, data);
 		mqueue = BaisiApplication.getRequestQueue();
 		imageLoader = new ImageLoader(mqueue, new BitmapCache());
-		media = new MediaMetadataRetriever();
+
 		presenter = new RadioImagePresenter(this);
 		this.view = view;
 	}
@@ -78,15 +65,21 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 			holder.tvRuo = (TextView) convertView.findViewById(R.id.tv_ruo);
 			convertView.setTag(holder);
 		}
+		else{
 		holder = (ViewHolder) convertView.getTag();
+		}
 		holder.tvName.setText(radio.getName());
 		holder.tvTime.setText(radio.getCreate_time());
 		String text = radio.getText().replace("\n", "");
-		holder.tvText.setText(radio.getText());
+		holder.tvText.setText(text);
 		holder.tvZan.setText(radio.getLove()+"");
 		holder.tvRuo.setText(radio.getHate()+"");
+<<<<<<< HEAD
 		holder.image.measure(34,34);
 		holder.tvText.setTextSize(Consts.textSize);
+=======
+//		holder.image.measure(34,34);
+>>>>>>> branch 'master' of https://github.com/queyaliang/baisibudejie.git
 //		int width = holder.image.getMeasuredWidth();
 //		int height = holder.image.getMeasuredHeight();
 //		RotateAnimation anim = new RotateAnimation(0, 360,26, 26);

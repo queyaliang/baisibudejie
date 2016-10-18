@@ -76,7 +76,9 @@ public class FunnyListAdapter extends BaseAdapter{
 			holder.url=(TextView) view.findViewById(R.id.url);
 			view.setTag(holder);
 		}
+		else{
 		holder=(ViewHolder) view.getTag();
+		}
 		Funny funny=getItem(i);
 		holder.tvname.setText(funny.getName());
 		holder.tvtime.setText(funny.getCreate_time());
@@ -93,7 +95,7 @@ public class FunnyListAdapter extends BaseAdapter{
 		holder.url.setTextSize(Consts.textSize);
 		Log.i("YYYYY", ""+funny.getProfile_image());
 //		x.image().bind(holder.cvuser,funny.getProfile_image());
-		holder.image.measure(34, 34);
+//		holder.image.measure(34, 34);
 //		int width = holder.image.getMeasuredWidth();
 //		int height = holder.image.getMeasuredHeight();
 //		RotateAnimation anim = new RotateAnimation(0, 360, 26, 26);

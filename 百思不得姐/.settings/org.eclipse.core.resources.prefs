@@ -5,6 +5,7 @@ eclipse.preferences.version=1
 encoding//src/demo/copy/baisi/activity/LoginActivity.java=UTF-8
 encoding//src/demo/copy/baisi/activity/RegistActivity.java=UTF-8
 encoding//src/demo/copy/baisi/adapter/PictureAdapter.java=UTF-8
+encoding//src/demo/copy/baisi/defineview/XListView.java=UTF-8
 encoding//src/demo/copy/baisi/fragment=UTF-8
 encoding//src/demo/copy/baisi/fragment/FunnyFragment.java=UTF-8
 encoding//src/demo/copy/baisi/fragment/VoiceFragment.java=UTF-8

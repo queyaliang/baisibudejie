@@ -14,35 +14,39 @@
         android:textColor="#ffffff"
         android:textSize="16sp" />
 
-    <ScrollView
-        android:id="@+id/sc_content"
+    <LinearLayout
+        android:id="@+id/ll_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="3dp" >
+        android:layout_marginTop="3dp"
+      
+        android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/ll_search"
+            android:id="@+id/rl_search_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="30dp"
+            android:layout_marginBottom="2dp"
+            android:layout_marginTop="2dp"
+            android:background="#d6203b"
+            android:orientation="horizontal" >
 
             <LinearLayout
-                android:id="@+id/rl_search_content"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="#d6203b"
-                android:orientation="horizontal" >
+                android:id="@+id/ll_edit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="#ffffff" >
 
                 <EditText
                     android:id="@+id/et_search"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="2dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_weight="5"
-                    android:background="#ffffff"
+                    android:layout_weight="7"
+                    android:background="@null"
                     android:hint="请输入搜索内容"
                     android:paddingLeft="8dp"
                     android:singleLine="true"
@@ -51,26 +55,35 @@
                     <requestFocus />
                 </EditText>
 
-                <TextView
-                    android:id="@+id/tv_search_button"
+                <ImageButton
+                    android:id="@+id/ibtn_clear_content"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="5dp"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="搜索"
-                    android:textColor="#aaffffff"
-                    android:textSize="14sp" />
+                    android:minWidth="2dp"
+                    android:background="@null"
+                    android:src="@drawable/clear_edittext" />
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/lv_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp" >
-            </ListView>
+            <TextView
+                android:id="@+id/tv_search_button"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="3dp"
+                android:layout_marginLeft="1dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="搜索"
+                android:textColor="#aaffffff"
+                android:textSize="14sp" />
         </LinearLayout>
-    </ScrollView>
+
+        <demo.copy.baisi.defineview.XListView
+            android:id="@+id/lv_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           android:paddingLeft="3dp"
+           android:paddingRight="3dp" />
+    </LinearLayout>
 
 </LinearLayout>
