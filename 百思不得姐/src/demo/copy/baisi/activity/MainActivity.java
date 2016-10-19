@@ -6,9 +6,19 @@ import java.util.List;
 import org.xutils.x;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.view.Menu;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import demo.copy.baisi.R;
-import demo.copy.baisi.R.layout;
-import demo.copy.baisi.R.menu;
 import demo.copy.baisi.Wj;
 import demo.copy.baisi.adapter.MainPagerAdapter;
 import demo.copy.baisi.app.BaisiApplication;
@@ -19,18 +29,7 @@ import demo.copy.baisi.fragment.RadioFragment;
 import demo.copy.baisi.fragment.SearchFragment;
 import demo.copy.baisi.fragment.VoiceFragment;
 import demo.copy.baisi.ui.Consts;
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.view.ViewPager;
-import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.view.Menu;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.RadioGroup.OnCheckedChangeListener;
+import demo.copy.baisi.util.NetworkUtil;
 
 @ContentView(R.layout.activity_main)
 public class MainActivity extends FragmentActivity {
@@ -62,8 +61,7 @@ public class MainActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		x.view().inject(this);
-		
-
+		NetworkUtil.checkNetworkState(this);
 		Wj wj=new Wj();
 		wj.showWj();
 
