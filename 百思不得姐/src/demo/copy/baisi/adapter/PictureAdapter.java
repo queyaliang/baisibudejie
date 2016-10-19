@@ -132,7 +132,10 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 		holder.webView.setBackgroundColor(Color.BLACK);
 		
 		WebSettings webSettings = holder.webView.getSettings();
-
+		holder.webView.setScrollBarStyle(0);
+		holder.webView.setInitialScale(200);//为25%，最小缩放等级 
+		webSettings.setUseWideViewPort(true); 
+		webSettings.setLoadWithOverviewMode(true); 
 		
 		String url = null;
 		if (path0 != null) {

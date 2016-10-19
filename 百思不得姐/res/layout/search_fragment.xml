@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="3dp"
-      
         android:orientation="vertical" >
 
         <LinearLayout
@@ -35,13 +34,13 @@
                 android:id="@+id/ll_edit"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_marginBottom="2dp"
                 android:layout_marginLeft="2dp"
                 android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
+                android:layout_weight="5"
                 android:background="#ffffff" >
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/et_search"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -50,18 +49,22 @@
                     android:hint="请输入搜索内容"
                     android:paddingLeft="8dp"
                     android:singleLine="true"
-                    android:textSize="14sp" >
+                    android:textSize="14sp" 
+                    android:completionThreshold="1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    >
 
                     <requestFocus />
-                </EditText>
+                </AutoCompleteTextView>
 
                 <ImageButton
                     android:id="@+id/ibtn_clear_content"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:minWidth="2dp"
                     android:background="@null"
+                    android:minWidth="2dp"
                     android:src="@drawable/clear_edittext" />
             </LinearLayout>
 
@@ -69,8 +72,8 @@
                 android:id="@+id/tv_search_button"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="3dp"
                 android:layout_marginLeft="1dp"
+                android:layout_marginRight="3dp"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="搜索"
@@ -78,12 +81,28 @@
                 android:textSize="14sp" />
         </LinearLayout>
 
-        <demo.copy.baisi.defineview.XListView
-            android:id="@+id/lv_content"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-           android:paddingLeft="3dp"
-           android:paddingRight="3dp" />
+            android:paddingLeft="3dp"
+            android:paddingRight="3dp" >
+
+            <demo.copy.baisi.defineview.XListView
+                android:id="@+id/lv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" 
+                android:visibility="invisible"
+                />
+
+            <TextView
+                android:id="@+id/tv_no_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="暂无搜索内容，请输入搜索信息"
+                android:textColor="#222222"
+                android:textSize="16sp" />
+        </RelativeLayout>
     </LinearLayout>
 
 </LinearLayout>
