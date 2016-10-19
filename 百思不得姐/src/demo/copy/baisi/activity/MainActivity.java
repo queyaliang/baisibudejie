@@ -64,7 +64,7 @@ public class MainActivity extends FragmentActivity {
 		NetworkUtil.checkNetworkState(this);
 		Wj wj=new Wj();
 		wj.showWj();
-
+		BaisiApplication.getApplication().addActivity(this);
 		//����Adapter
 		setAdapter();
 		//����Listener
