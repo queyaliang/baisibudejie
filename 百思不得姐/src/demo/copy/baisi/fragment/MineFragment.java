@@ -20,10 +20,12 @@ import demo.copy.baisi.activity.MapActivity;
 import demo.copy.baisi.activity.SettingActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Avatar;
+import demo.copy.baisi.entity.TheThirdUserInfo;
 import demo.copy.baisi.entity.User;
 import demo.copy.baisi.presenter.IMinePresenter;
 import demo.copy.baisi.presenter.impl.MinePresenter;
 import demo.copy.baisi.ui.Consts;
+import demo.copy.baisi.util.ReadTheThirdUser;
 import demo.copy.baisi.view.IMineView;
 import android.app.Activity;
 import android.content.Intent;
@@ -62,6 +64,7 @@ public class MineFragment extends Fragment implements IMineView{
 	private TextView tvSetting;
 	@ViewInject(R.id.tv_location)
 	private TextView tvLocation;
+	
 
 	private IMinePresenter presenter;
 	private static final int REQUEST_CODE_LOGIN_USER = 1;
@@ -236,6 +239,13 @@ public class MineFragment extends Fragment implements IMineView{
 			if (bitmap!=null) {
 				ivPhoto.setImageBitmap(bitmap);
 			}
+			TheThirdUserInfo theThirdUser = ReadTheThirdUser.read();
+			if (theThirdUser.isValid()) {
+				tvNickname.setText(theThirdUser.getName());
+				
+			}
+			
+			
 		}
 
 

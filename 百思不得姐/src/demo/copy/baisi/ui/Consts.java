@@ -27,6 +27,8 @@ public class Consts {
 	
 	public static final String USER_NAME_AND_AVATAR = "avatar.info";
 	
+	public static final String THE_THIRD_USER = "thethirduser.info";
+	
 	public static  float textSize = 14;
 	
 	

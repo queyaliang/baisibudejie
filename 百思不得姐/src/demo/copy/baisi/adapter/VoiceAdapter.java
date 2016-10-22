@@ -7,18 +7,23 @@ import com.android.volley.toolbox.ImageLoader.ImageCache;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.activity.WebViewActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Voice;
 import demo.copy.baisi.ui.CircleImageView;
 import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
+import demo.copy.baisi.util.ShareThings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v4.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -75,6 +80,7 @@ public class VoiceAdapter extends BaseAdapter{
 		holder.tvText.setTextSize(Consts.textSize);
 		ImageListener listener = ImageLoader.getImageListener(holder.ivProfil_image, R.drawable.ic_launcher, R.drawable.ic_launcher);
 		imageLoader.get(voice.getProfile_image(),listener);
+		
 		return convertView;
 	}
 	class ViewHolder{
@@ -83,5 +89,6 @@ public class VoiceAdapter extends BaseAdapter{
 		TextView tvPublishTime;
 		TextView tvText;
 	}
+	
 
 }

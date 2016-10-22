@@ -3,6 +3,7 @@ package demo.copy.baisi.adapter;
 import java.util.List;
 
 import android.R.color;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -16,6 +17,8 @@ import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -29,14 +32,15 @@ import demo.copy.baisi.entity.Funny;
 import demo.copy.baisi.ui.CircleImageView;
 import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
+import demo.copy.baisi.util.ShareThings;
 
 public class FunnyListAdapter extends BaseAdapter{
-	private Context context;
+	private Activity context;
 	private List<Funny> funnys;
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader;
 
-	public FunnyListAdapter(Context context, List<Funny> funnys){
+	public FunnyListAdapter(Activity context, List<Funny> funnys){
 		this.context=context;
 		this.funnys=funnys;
 		this.inflater=LayoutInflater.from(context);
@@ -74,6 +78,7 @@ public class FunnyListAdapter extends BaseAdapter{
 			holder.hate=(TextView) view.findViewById(R.id.hate);
 			holder.text=(TextView) view.findViewById(R.id.funny_text);
 			holder.url=(TextView) view.findViewById(R.id.url);
+			holder.ivShare=(ImageView) view.findViewById(R.id.ibshare);
 			view.setTag(holder);
 		}
 		else{
@@ -94,23 +99,13 @@ public class FunnyListAdapter extends BaseAdapter{
 		holder.url.setTextColor(Color.BLUE);
 		holder.url.setTextSize(Consts.textSize);
 		Log.i("YYYYY", ""+funny.getProfile_image());
-//		x.image().bind(holder.cvuser,funny.getProfile_image());
-//		holder.image.measure(34, 34);
-//		int width = holder.image.getMeasuredWidth();
-//		int height = holder.image.getMeasuredHeight();
-//		RotateAnimation anim = new RotateAnimation(0, 360, 26, 26);
-//		anim.setDuration(10000);
-//		//匀速旋转
-//		anim.setInterpolator(new LinearInterpolator());
-//		//无限重复
-//		anim.setRepeatCount(Animation.INFINITE);
-//		holder.image.startAnimation(anim);
 		
 		ImageListener listener = ImageLoader.getImageListener(holder.image, R.drawable.welcom_icon, R.drawable.welcom_icon);
 		imageLoader.get(funny.getProfile_image(), listener,holder.image.getWidth(),holder.image.getHeight());
 		
 		holder.url.setTag("url"+i);
 		holder.url.setOnClickListener(new ClickItemListener(i,url));
+		holder.ivShare.setOnClickListener(new ClickItemListener(i,url));
 		
 		
 		return view;
@@ -123,6 +118,7 @@ public class FunnyListAdapter extends BaseAdapter{
 		TextView hate;
 		TextView text;
 		TextView url;
+		ImageView ivShare;
 	}
 	class ClickItemListener implements View.OnClickListener{
 		private int position;
@@ -134,9 +130,18 @@ public class FunnyListAdapter extends BaseAdapter{
 
 		@Override
 		public void onClick(View view) {
-			Intent intent = new Intent(context, WebViewActivity.class);
-			intent.putExtra("_url", url);
-			context.startActivity(intent);
+			switch (view.getId()) {
+			case R.id.url:
+				Intent intent = new Intent(context, WebViewActivity.class);
+				intent.putExtra("_url", url);
+				context.startActivity(intent);
+				break;
+
+			case R.id.ibshare:
+				ShareThings.showShare(context, url);
+				
+				break;
+			}
 		}
 	}
 	

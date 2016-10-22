@@ -3,27 +3,19 @@ package demo.copy.baisi.adapter;
 import java.io.File;
 import java.util.List;
 
-import org.xutils.x;
-import org.xutils.view.annotation.ViewInject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Environment;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.webkit.WebSettings.LayoutAlgorithm;
-import android.webkit.WebSettings.RenderPriority;
-import android.webkit.WebSettings.ZoomDensity;
 import android.webkit.WebView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,35 +25,32 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 
 import demo.copy.baisi.R;
-import demo.copy.baisi.activity.PictureWebviewActivity;
 import demo.copy.baisi.activity.WebViewActivity;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.defineview.MyWebView;
 import demo.copy.baisi.entity.Pictures;
-import demo.copy.baisi.presenter.impl.GifOrImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
 import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
+import demo.copy.baisi.util.ShareThings;
 import demo.copy.baisi.view.IGifOrImageView;
 
 public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 
 	// 鏁版嵁
 	private List<Pictures> list;
-	private Context context;
+	private Activity context;
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader;
 	private ListView listview;	
 //	File file = new File(BaisiApplication.getApplication().getCacheDir(), "webcache");
-	private GifOrImagePresenter presenter;
 
-	public PictureAdapter(List<Pictures> list, Context context,
+	public PictureAdapter(List<Pictures> list, Activity context,
 			ListView listView) {
 		super();
 		this.list = list;
 		this.context = context;
 		this.inflater = LayoutInflater.from(context);
-		presenter = new GifOrImagePresenter(this);
 		RequestQueue mqueue = BaisiApplication.getRequestQueue();
 		imageLoader = new ImageLoader(mqueue, new BitmapCache());
 		this.listview = listView;
@@ -100,6 +89,7 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 					.findViewById(R.id.tvUserName);
 			holder.tvZan = (TextView) convertView.findViewById(R.id.tvZan);
 			holder.layout = (RelativeLayout) convertView.findViewById(R.id.rlContent);
+			holder.ivFenXiang = (ImageView) convertView.findViewById(R.id.ivFenXiang);
 			convertView.setTag(holder);
 		}else{
 		holder = (ViewHolder) convertView.getTag();
@@ -153,6 +143,7 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 		}
 		holder.webView.loadUrl(url);		
 		holder.layout.setOnClickListener(new InteOnClickeListeners(position, url));
+		holder.ivFenXiang.setOnClickListener(new InteOnClickeListeners(position, url));
 		return convertView;
 	}
 
@@ -168,11 +159,18 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 
 		@Override
 		public void onClick(View v) {
-			WebView webview = (WebView) listview.findViewWithTag("webview"
-					+ position);
-			Intent intent = new Intent(context, WebViewActivity.class);
-			intent.putExtra("_url", url);
-			context.startActivity(intent);
+			switch (v.getId()) {
+			case R.id.rlContent:
+				WebView webview = (WebView) listview.findViewWithTag("webview"
+						+ position);
+				Intent intent = new Intent(context, WebViewActivity.class);
+				intent.putExtra("_url", url);
+				context.startActivity(intent);
+				break;
+			case R.id.ivFenXiang:
+				ShareThings.showShare(context, url);
+				break;
+			}
 		}		
 	}
 
@@ -187,13 +185,13 @@ public class PictureAdapter extends BaseAdapter implements IGifOrImageView{
 		TextView tvTucao;
 		TextView tvFenxiang;
 		RelativeLayout layout;
+		ImageView ivFenXiang;
 	}
 
 
 	@Override
 	public void getGifOrImageUrl(String url) {
 		Log.i("demo", "adapter-->path"+url);
-		
 	}
 
 }

@@ -45,7 +45,7 @@
         android:layout_centerHorizontal="true"
         android:src="@drawable/login_photo_default"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="20dp"/>
 
     <LinearLayout
         android:id="@+id/linearLayout4"
@@ -123,4 +123,55 @@
         android:layout_below="@+id/btnLogin"
         android:layout_alignRight="@+id/btnLogin"
         android:layout_alignEnd="@+id/btnLogin"/>
+    <LinearLayout 
+        android:id="@+id/ll_third_login"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@+id/btnLogin"
+        android:layout_marginTop="30dp"
+        >
+        <ImageView 
+            android:id="@+id/iv_xinlang"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ssdk_oks_classic_sinaweibo"
+            android:scaleType="center"
+            android:layout_weight="1"
+            
+            />
+        <ImageView 
+            android:id="@+id/iv_qq"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ssdk_oks_classic_qq"
+            android:scaleType="center"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
+    <LinearLayout 
+        android:id="@+id/ll_third_login_state"
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:layout_below="@+id/ll_third_login"
+        >
+        <TextView 
+            android:id="@+id/tv_xinlang_state"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="未登录"
+            android:gravity="center_horizontal"
+            android:textColor="#777777"
+            />
+        <TextView 
+            android:id="@+id/tv_qq_state"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:text="未登录"
+            android:gravity="center_horizontal"
+            android:textColor="#777777"
+            />
+    </LinearLayout>
+    
 </RelativeLayout>

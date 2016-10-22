@@ -3,6 +3,7 @@ package demo.copy.baisi.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,33 +11,33 @@ import android.view.ViewGroup;
 
 public abstract class BaseAdapter<T> extends android.widget.BaseAdapter{
 	
-	private Context context;
+	private Activity context;
 	
 	private List<T> data;
 	
 	private LayoutInflater inflater ;
 	
 	/**
-	 * ¹¹Ôì·½·¨£¬´´½¨¶ÔÏó
+	 * ï¿½ï¿½ï¿½ì·½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param context
 	 * @param data
 	 */
-	public BaseAdapter(Context context, List<T> data) {
+	public BaseAdapter(Activity context, List<T> data) {
 		super();
 		setContext(context);
 		setData(data);
 		inflater = LayoutInflater.from(context);
 	}
 	/**
-	 * ·µ»ØContext
+	 * ï¿½ï¿½ï¿½ï¿½Context
 	 * @return
 	 */
-	protected final Context getContext(){
+	protected final Activity getContext(){
 		return context;
 	}
 	
 	/**
-	 * ·µ»ØÊý¾ÝÐÅÏ¢
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 	 * @return
 	 */
 	protected final List<T> getData(){
@@ -45,7 +46,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter{
 	}
 	
 	/**
-	 * ·µ»ØLayoutInflater
+	 * ï¿½ï¿½ï¿½ï¿½LayoutInflater
 	 * @return
 	 */
 	protected final LayoutInflater getLayoutInflater(){
@@ -53,17 +54,17 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter{
 	}
 	
 	/**
-	 * ÅÐ¶ÏContextÊÇ·ñÎªnull
+	 * ï¿½Ð¶ï¿½Contextï¿½Ç·ï¿½Îªnull
 	 * @param context
 	 */
-	private void setContext(Context context){
+	private void setContext(Activity context){
 		if (context==null) {
-			throw new IllegalArgumentException("contextÎªnull,Çë´«Èë·Ç¿ÕµÄcontext");
+			throw new IllegalArgumentException("contextÎªnull,ï¿½ë´«ï¿½ï¿½Ç¿Õµï¿½context");
 		}
 		this.context = context;
 	}
 	/**
-	 * ÅÐ¶Ïlist¼¯ºÏÊÇ·ñÎªnull
+	 * ï¿½Ð¶ï¿½listï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªnull
 	 * @param data
 	 */
 	private void setData(List<T> data){

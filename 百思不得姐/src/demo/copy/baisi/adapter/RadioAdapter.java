@@ -7,7 +7,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,8 +25,8 @@ import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.entity.Radio;
 import demo.copy.baisi.presenter.impl.RadioImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
-import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
+import demo.copy.baisi.util.ShareThings;
 import demo.copy.baisi.view.IRadioImageView;
 
 public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
@@ -38,7 +38,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 	
 	
 
-	public RadioAdapter(Context context, List<Radio> data,ListView view) {
+	public RadioAdapter(Activity context, List<Radio> data,ListView view) {
 		super(context, data);
 		mqueue = BaisiApplication.getRequestQueue();
 		imageLoader = new ImageLoader(mqueue, new BitmapCache());
@@ -63,6 +63,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 			holder.ibtnPlay = (ImageButton) convertView.findViewById(R.id.ibtn_play);
 			holder.tvZan = (TextView) convertView.findViewById(R.id.tv_zan);
 			holder.tvRuo = (TextView) convertView.findViewById(R.id.tv_ruo);
+			holder.ivShare = (ImageView) convertView.findViewById(R.id.iv_share);
 			convertView.setTag(holder);
 		}
 		else{
@@ -75,15 +76,6 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		holder.tvZan.setText(radio.getLove()+"");
 		holder.tvRuo.setText(radio.getHate()+"");
 
-//		int width = holder.image.getMeasuredWidth();
-//		int height = holder.image.getMeasuredHeight();
-//		RotateAnimation anim = new RotateAnimation(0, 360,26, 26);
-//		anim.setDuration(10000);
-//		//ÔÈËÙÐý×ª
-//		anim.setInterpolator(new LinearInterpolator());
-//		//ÎÞÏÞÖØ¸´
-//		anim.setRepeatCount(Animation.INFINITE);
-//		holder.image.startAnimation(anim);
 		
 		ImageListener listener = ImageLoader.getImageListener(holder.image, R.drawable.a010, R.drawable.a010);
 		imageLoader.get(radio.getProfile_image(), listener,holder.image.getWidth(),holder.image.getHeight());
@@ -100,13 +92,15 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		
 		File file  = new File(name);
 		if (file.exists()) {
-			Log.i("demo", "¸ÃÍ¼Æ¬´æÔÚÖ±½Ó´ÓÎÄ¼þÖÐ¶ÁÈ¡");
+			Log.i("demo", "ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó´ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½È¡");
 			Bitmap bitmap = BitmapFactory.decodeFile(name);
 			holder.ivRadio.setImageBitmap(bitmap);
 		}else {
-			Log.v("demo", "radioAdapter-->position³ö:"+position);
+			Log.v("demo", "radioAdapter-->positionï¿½ï¿½:"+position);
 			presenter.getRadioImage(url,name,position);
 		}
+		holder.ivShare.setOnClickListener(new PlayRadioListener(url));
+		
 		return convertView;
 	}
 	
@@ -119,6 +113,7 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 		ImageButton 	ibtnPlay;
 		TextView 		tvZan;
 		TextView		tvRuo;
+		ImageView 		ivShare;
 	}
 	
 	class PlayRadioListener implements OnClickListener{
@@ -130,14 +125,22 @@ public class RadioAdapter extends BaseAdapter<Radio> implements IRadioImageView{
 
 		@Override
 		public void onClick(View v) {
-			Intent intent = new Intent(getContext(), RadioActivity.class);
-			intent.putExtra("_url", url);
-			getContext().startActivity(intent);
+			switch (v.getId()) {
+			case R.id.ibtn_play:
+				Intent intent = new Intent(getContext(), RadioActivity.class);
+				intent.putExtra("_url", url);
+				getContext().startActivity(intent);
+				break;
+
+			case R.id.iv_share:
+				ShareThings.showShare(getContext(), url);
+				break;
+			}
 		}
 	}
 	@Override
 	public void getRadioImage(Bitmap bitmap,int position) {
-		Log.v("demo", "radioAdapter-->positionÊÕ:"+position);
+		Log.v("demo", "radioAdapter-->positionï¿½ï¿½:"+position);
 		ImageView ivRadio = (ImageView) view.findViewWithTag("ivRadio"+position);
 		if (ivRadio==null) {
 //			ivRadio.setImageResource(color.background_dark);

@@ -72,7 +72,7 @@ public class WebViewActivity extends Activity {
 ////		webSettings.setJavaScriptCanOpenWindowsAutomatically(true);  
 		webSettings.setUseWideViewPort(true);//关键点  
 //
-//		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);  
+		webSettings.setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);  
 //
 ////		webSettings.setDisplayZoomControls(false);  
 		webSettings.setJavaScriptEnabled(true); // 设置支持javascript脚本  

@@ -8,6 +8,12 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.ImageLoader.ImageListener;
 
 import demo.copy.baisi.R;
+import demo.copy.baisi.activity.RadioActivity;
+import demo.copy.baisi.activity.VoiceDetailActivity;
+import demo.copy.baisi.activity.WebViewActivity;
+import demo.copy.baisi.adapter.FunnyListAdapter.ClickItemListener;
+import demo.copy.baisi.adapter.PictureAdapter.InteOnClickeListeners;
+import demo.copy.baisi.adapter.RadioAdapter.PlayRadioListener;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.defineview.MyWebView;
 import demo.copy.baisi.defineview.XListView;
@@ -20,9 +26,12 @@ import demo.copy.baisi.presenter.impl.RadioImagePresenter;
 import demo.copy.baisi.ui.CircleImageView;
 import demo.copy.baisi.ui.Consts;
 import demo.copy.baisi.util.BitmapCache;
+import demo.copy.baisi.util.ShareThings;
 import demo.copy.baisi.view.IRadioImageView;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -30,8 +39,10 @@ import android.graphics.Paint;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -43,13 +54,13 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 	
 	
 	private List<AllFather> lists;
-	private Context context;
+	private Activity context;
 	private LayoutInflater inflater;
 	private ImageLoader imageLoader;
 	private RadioImagePresenter presenter;
 	private XListView lvContent;
 
-	public SearchAdapter(List<AllFather> lists,Context context, XListView lvContent){
+	public SearchAdapter(List<AllFather> lists,Activity context, XListView lvContent){
 		this.lvContent = lvContent;
 		this.lists = lists;
 		this.context = context;
@@ -126,6 +137,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 						.findViewById(R.id.tvUserName);
 				pHolder.tvZan = (TextView) convertView.findViewById(R.id.tvZan);
 				pHolder.layout = (RelativeLayout) convertView.findViewById(R.id.rlContent);
+				pHolder.ivFenXiang = (ImageView) convertView.findViewById(R.id.ivFenXiang);
 				convertView.setTag(pHolder);
 				break;
 			case TYPE_FUNNY:
@@ -138,6 +150,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 				fHolder.hate=(TextView) convertView.findViewById(R.id.hate);
 				fHolder.text=(TextView) convertView.findViewById(R.id.funny_text);
 				fHolder.url=(TextView) convertView.findViewById(R.id.url);
+				fHolder.ivShare=(ImageView) convertView.findViewById(R.id.ibshare);
 				convertView.setTag(fHolder);
 				break;
 			case TYPE_VOICE:
@@ -147,6 +160,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 				vHolder.tvName = (TextView) convertView.findViewById(R.id.tv_name);
 				vHolder.tvPublishTime = (TextView) convertView.findViewById(R.id.tv_publishtime);
 				vHolder.tvText = (TextView) convertView.findViewById(R.id.tv_text);
+				vHolder.rlVoice = (RelativeLayout) convertView.findViewById(R.id.rl_voice_item);
 				convertView.setTag(vHolder);
 				break;
 			case TYPE_RADIO:
@@ -160,6 +174,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 				rHolder.ibtnPlay = (ImageButton) convertView.findViewById(R.id.ibtn_play);
 				rHolder.tvZan = (TextView) convertView.findViewById(R.id.tv_zan);
 				rHolder.tvRuo = (TextView) convertView.findViewById(R.id.tv_ruo);
+				rHolder.ivShare = (ImageView) convertView.findViewById(R.id.iv_share);
 				convertView.setTag(rHolder);
 				break;
 
@@ -200,14 +215,11 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			String path1 = picture.getImage1();
 			String path2 = picture.getImage2();
 			String path3 = picture.getImage3();
-
-			pHolder.webView.setHorizontalScrollBarEnabled(false);//Ë®Æ½²»ÏÔÊ¾  
-			pHolder.webView.setVerticalScrollBarEnabled(false); //´¹Ö±²»ÏÔÊ¾ 
+			pHolder.webView.setHorizontalScrollBarEnabled(false);//Ë®Æ½ï¿½ï¿½ï¿½ï¿½Ê¾  
+			pHolder.webView.setVerticalScrollBarEnabled(false); //ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ê¾ 
 			pHolder.webView.setBackgroundColor(Color.BLACK);
-			
+			pHolder.webView.setDrawingCacheEnabled(true);
 			WebSettings webSettings = pHolder.webView.getSettings();
-
-			
 			String url = null;
 			if (path0 != null) {
 				Log.i("de", "url-->1-->" + path0);
@@ -223,6 +235,8 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 				url = path3;
 			}
 			pHolder.webView.loadUrl(url);
+			pHolder.layout.setOnClickListener(new InteOnClickeListeners(position, url));
+			pHolder.ivFenXiang.setOnClickListener(new InteOnClickeListeners(position, url));
 			break;
 		case TYPE_FUNNY:
 			Funny funny = (Funny) lists.get(position);
@@ -241,9 +255,11 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			Log.i("YYYYY", ""+funny.getProfile_image());
 			ImageListener flistener = ImageLoader.getImageListener(fHolder.image, R.drawable.welcom_icon, R.drawable.welcom_icon);
 			imageLoader.get(funny.getProfile_image(), flistener,fHolder.image.getWidth(),fHolder.image.getHeight());
+			fHolder.url.setOnClickListener(new ClickItemListener(position,fUrl));
+			fHolder.ivShare.setOnClickListener(new ClickItemListener(position,fUrl));
 			break;
 		case TYPE_VOICE:
-			Voice voice = (Voice) lists.get(position);
+			final Voice voice = (Voice) lists.get(position);
 			vHolder.tvName.setText(voice.getName());
 			vHolder.tvPublishTime.setText(voice.getCreate_time());
 			String vText = voice.getText().replace("\n", "").replace("\r", "").trim();
@@ -252,6 +268,14 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			vHolder.tvText.setTextSize(Consts.textSize);
 			ImageListener vListener = ImageLoader.getImageListener(vHolder.ivProfil_image, R.drawable.ic_launcher, R.drawable.ic_launcher);
 			imageLoader.get(voice.getProfile_image(),vListener);
+			vHolder.rlVoice.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(context,VoiceDetailActivity.class);
+					intent.putExtra("voice", voice);
+					context.startActivity(intent);
+				}
+			});
 			break;
 		case TYPE_RADIO:
 			Radio radio = (Radio) lists.get(position);
@@ -267,24 +291,27 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 			rHolder.ivRadio.setImageResource(R.color.radio_color);
 			rHolder.ivRadio.setTag("ivRadio"+position);
 			String rUrl = radio.getVideo_uri();
+			rHolder.ibtnPlay.setOnClickListener(new PlayRadioListener(rUrl));
 			String radioname = radio.getCreate_time()+position;
 			Log.i("demo", "radioname-->"+radioname);
 			String name =context.getExternalCacheDir().getAbsolutePath() + "/" + radioname + ".jpg";
 			File file  = new File(name);
 			if (file.exists()) {
-				Log.i("demo", "¸ÃÍ¼Æ¬´æÔÚÖ±½Ó´ÓÎÄ¼þÖÐ¶ÁÈ¡");
+				Log.i("demo", "ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó´ï¿½ï¿½Ä¼ï¿½ï¿½Ð¶ï¿½È¡");
 				Bitmap bitmap = BitmapFactory.decodeFile(name);
 				rHolder.ivRadio.setImageBitmap(bitmap);
 			}else {
-				Log.v("demo", "radioAdapter-->position³ö:"+position);
+				Log.v("demo", "radioAdapter-->positionï¿½ï¿½:"+position);
 				presenter.getRadioImage(rUrl,name,position);
 			}
+			rHolder.ivShare.setOnClickListener(new PlayRadioListener(rUrl));
+			
 			break;
 		}
 		return convertView;
 	}
 	
-	//4ÖÖViewHolder
+	//4ï¿½ï¿½ViewHolder
 	class PictureViewholder{
 		CircleImageView ivPic;
 		TextView tvUserName;
@@ -295,6 +322,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 		TextView tvZan;
 		TextView tvTucao;
 		RelativeLayout layout;
+		ImageView ivFenXiang;
 	}
 	
 	class FunnyViewHolder{
@@ -305,6 +333,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 		TextView hate;
 		TextView text;
 		TextView url;
+		ImageView ivShare;
 	}
 	
 	class VoiceViewHolder{
@@ -312,6 +341,7 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 		TextView tvName;
 		TextView tvPublishTime;
 		TextView tvText;
+		RelativeLayout rlVoice;
 	}
 	
 	class RadioViewHolder{
@@ -323,20 +353,89 @@ public class SearchAdapter extends BaseAdapter implements IRadioImageView{
 		ImageButton 	ibtnPlay;
 		TextView 		tvZan;
 		TextView		tvRuo;
+		ImageView 		ivShare;
 		
 	}
 	@Override
 	public void getRadioImage(Bitmap bitmap,int position) {
-		Log.v("demo", "radioAdapter-->positionÊÕ:"+position);
+		Log.v("demo", "radioAdapter-->positionï¿½ï¿½:"+position);
 		ImageView ivRadio = (ImageView) lvContent.findViewWithTag("ivRadio"+position);
 		if (ivRadio==null) {
 //			ivRadio.setImageResource(color.background_dark);
 			return;
 		}
 		ivRadio.setImageBitmap(bitmap);
-		
-		
 	}
 	
+	class ClickItemListener implements View.OnClickListener{
+		private int position;
+		private String url;
+		public ClickItemListener(int position ,String url) {
+			this.position = position;
+			this.url = url;
+		}
+
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+			case R.id.url:
+				Intent intent = new Intent(context, WebViewActivity.class);
+				intent.putExtra("_url", url);
+				context.startActivity(intent);
+				break;
+
+			case R.id.ibshare:
+				ShareThings.showShare(context, url);
+				break;
+			}
+		}
+	}
+	
+	class PlayRadioListener implements OnClickListener{
+		private String url;
+		
+		public PlayRadioListener(String url) {
+			this.url = url;
+		}
+
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.ibtn_play:
+				Intent intent = new Intent(context, RadioActivity.class);
+				intent.putExtra("_url", url);
+				context.startActivity(intent);
+				break;
+
+			case R.id.iv_share:
+				ShareThings.showShare(context, url);
+				break;
+			}
+		}
+	}
+	
+	class InteOnClickeListeners implements OnClickListener{
+		private int position;
+		private String url;
+		public InteOnClickeListeners(int position, String url) {
+			this.position = position;
+			this.url = url;
+		}
+		@Override
+		public void onClick(View v) {
+			switch (v.getId()) {
+			case R.id.rlContent:
+				WebView webview = (WebView) lvContent.findViewWithTag("webview"
+						+ position);
+				Intent intent = new Intent(context, WebViewActivity.class);
+				intent.putExtra("_url", url);
+				context.startActivity(intent);
+				break;
+			case R.id.ivFenXiang:
+				ShareThings.showShare(context, url);
+				break;
+			}
+		}		
+	}
 
 }

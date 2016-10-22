@@ -7,6 +7,7 @@ import org.xutils.view.annotation.ViewInject;
 import demo.copy.baisi.R;
 import demo.copy.baisi.app.BaisiApplication;
 import demo.copy.baisi.ui.Consts;
+import demo.copy.baisi.util.Share;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -29,12 +30,15 @@ public class SettingActivity extends Activity {
 	private RadioButton rbtnZhong;
 	@ViewInject(R.id.rbtn_da)
 	private RadioButton rbtnDa;
-
+	@ViewInject(R.id.radiogroup)
 	private RadioGroup radioGroup;
 	@ViewInject(R.id.tv_about)
 	private TextView tvabout;
 	@ViewInject(R.id.tv_help)
 	private TextView tvhelp;
+	@ViewInject(R.id.tv_recommend)
+	private TextView tvRecommend;
+	
 	private BaisiApplication app = BaisiApplication.getApplication();
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +72,6 @@ public class SettingActivity extends Activity {
 			}
 		});
 
-		//判断sharepreference中是否存有cart信息  有的话则一起发送数据
-		
-		radioGroup=(RadioGroup) findViewById(R.id.radiogroup);
 		radioGroup.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -86,6 +87,13 @@ public class SettingActivity extends Activity {
 					
 				}
 				edit.commit();
+			}
+		});
+		tvRecommend.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Share.showShare(getParent());
 			}
 		});
 		

@@ -31,6 +31,7 @@ import demo.copy.baisi.entity.Voice;
 import demo.copy.baisi.service.VoicePlayerService;
 import demo.copy.baisi.service.VoicePlayerService.VoiceBinder;
 import demo.copy.baisi.util.BitmapUtils;
+import demo.copy.baisi.util.ShareThings;
 public class VoiceDetailActivity extends Activity {
 	//
 	private int totalZan;
@@ -60,7 +61,10 @@ public class VoiceDetailActivity extends Activity {
 	private ImageButton ibZan;
 	@ViewInject(R.id.ib_tucao)
 	private ImageButton ibTucao;
+	@ViewInject(R.id.ib_fenxiang)
+	private ImageButton ibFenxiang;
 	
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_voice_detail);
@@ -68,12 +72,12 @@ public class VoiceDetailActivity extends Activity {
 		int a = 0;
 		Intent intent = getIntent();
 		voice = (Voice) intent.getSerializableExtra("voice");
-		//³õÊ¼»¯¿Ø¼þ
+		//ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ø¼ï¿½
 		x.view().inject(this);
 		setVoiceInfo();
 		bindVoiceService();
 		setListeners();
-		//×¢²á×é¼þ
+		//×¢ï¿½ï¿½ï¿½ï¿½ï¿½
 		registComponents();
 	}
 	private void registComponents() {
@@ -86,65 +90,71 @@ public class VoiceDetailActivity extends Activity {
 		public void onReceive(Context context, Intent intent) {
 			String action = intent.getAction();
 			if(action.equals("ACTION_UPDATE_MUSIC_PROGRESS")){
-				//½ÓÊÕµ½ÁË¸úÐÂÒôÀÖ½ø¶ÈµÄ¹ã²¥
+				//ï¿½ï¿½ï¿½Õµï¿½ï¿½Ë¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö½ï¿½ÈµÄ¹ã²¥
 				int total = intent.getIntExtra("total", -1);
 				int progress = intent.getIntExtra("progress", -1);
-				//¸üÐÂ½ø¶ÈÌõ
+				//ï¿½ï¿½ï¿½Â½ï¿½ï¿½ï¿½ï¿½
 				seekBar.setMax(total);
 				seekBar.setProgress(progress);
 			}
 		}
-		
+
 	}
 	private void setListeners() {
 		ibPlayOrPause.setOnClickListener(new OnClickListener() {
-			
+
 
 			public void onClick(View v) {
 				String url = voice.getVoice_uri();
 				MediaPlayer player = binder.getplayer();
-			 pauseposition = binder.getpauseposition();
+				pauseposition = binder.getpauseposition();
 				if(player.isPlaying()){
 					binder.pauseplayer();
 					ibPlayOrPause.setImageResource(R.drawable.ic_play_normal);
 				}else if(pauseposition!=0){
-				binder.seekTo(pauseposition);
-				ibPlayOrPause.setImageResource(R.drawable.ic_pause_normal);
+					binder.seekTo(pauseposition);
+					ibPlayOrPause.setImageResource(R.drawable.ic_pause_normal);
 				}else {
 					binder.playVoice(url);
 					ibPlayOrPause.setImageResource(R.drawable.ic_pause_normal);
 				}
 			}
 		});
-		//¸øseekBarÌí¼ÓÊÂ¼þ¼àÌý
-				seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-					public void onStopTrackingTouch(SeekBar seekBar) {
-					}
-					public void onStartTrackingTouch(SeekBar seekBar) {
-					}
-					public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-						if(fromUser){ //½ø¶ÈÌõµÄ¸üÐÂÊÇÓÉÓÃ»§ÒýÆðµÄ
-							pauseposition = progress;
-							binder.seekTo(pauseposition);
-						}
-					}
-				});
-				ibZan.setOnClickListener(new OnClickListener() {
-					public void onClick(View v) {
-						totalZan = voice.getLove()+1;
-						tvZan.setText(totalZan+"");
-					}
-				});
-				ibTucao.setOnClickListener(new OnClickListener() {
-					public void onClick(View v) {
-						totalHate = voice.getHate()+1;
-						tvTuCao.setText(totalHate+"");
-					}
-				});
+		seekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				if(fromUser){ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					pauseposition = progress;
+					binder.seekTo(pauseposition);
+				}
+			}
+		});
+		ibZan.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				totalZan = voice.getLove()+1;
+				tvZan.setText(totalZan+"");
+			}
+		});
+		ibTucao.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				totalHate = voice.getHate()+1;
+				tvTuCao.setText(totalHate+"");
+			}
+		});
+		ibFenxiang.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+			ShareThings.showShare(VoiceDetailActivity.this, voice.getVoice_uri());
+			}
+		});
+		
 	}
 	/**
 	 * 
-	 * °ó¶¨service
+	 * ï¿½ï¿½service
 	 */
 	private void bindVoiceService() {
 		Intent intent = new Intent(this,VoicePlayerService.class);
@@ -183,5 +193,6 @@ public class VoiceDetailActivity extends Activity {
 		BaisiApplication.getApplication().removeActivity(this);
 		super.onDestroy();
 	}
+	
 
 }
